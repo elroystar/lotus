@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="1920px"
+    android:layout_height="1080px"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:layout_marginBottom="13px"
+        android:layout_marginLeft="13px"
+        android:layout_marginRight="13px"
+        android:layout_marginTop="17px"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="1894px"
+            android:layout_height="570px"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="1120px"
+                android:layout_height="570px"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="1120px"
+                    android:layout_height="142px"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="112px"
+                        android:layout_height="142px"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_num_shape"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textSize="35sp" />
+
+                    <TextView
+                        android:layout_width="112px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_num_shape"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textSize="35sp" />
+
+                    <TextView
+                        android:layout_width="112px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_num_shape"
+                        android:gravity="center"
+                        android:text="2"
+                        android:textSize="35sp" />
+
+                    <TextView
+                        android:layout_width="112px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_num_shape"
+                        android:gravity="center"
+                        android:text="3"
+                        android:textSize="35sp" />
+
+                    <TextView
+                        android:layout_width="112px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_num_shape"
+                        android:gravity="center"
+                        android:text="4"
+                        android:textSize="35sp" />
+
+                    <TextView
+                        android:layout_width="112px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_num_shape"
+                        android:gravity="center"
+                        android:text="5"
+                        android:textSize="35sp" />
+
+                    <TextView
+                        android:layout_width="112px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_num_shape"
+                        android:gravity="center"
+                        android:text="6"
+                        android:textSize="35sp" />
+
+                    <TextView
+                        android:layout_width="112px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_num_shape"
+                        android:gravity="center"
+                        android:text="7"
+                        android:textSize="35sp" />
+
+                    <TextView
+                        android:layout_width="112px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_num_shape"
+                        android:gravity="center"
+                        android:text="8"
+                        android:textSize="35sp" />
+
+                    <TextView
+                        android:layout_width="112px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/tv_num_shape"
+                        android:gravity="center"
+                        android:text="9"
+                        android:textSize="35sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="1120px"
+                    android:layout_height="190px"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="积分"
+                        android:textSize="60sp" />
+
+                    <Button
+                        android:layout_width="784px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_register_shape"
+                        android:text="注册"
+                        android:textSize="60sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="1120px"
+                    android:layout_height="233px"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="洗衣"
+                        android:textSize="60sp" />
+
+                    <Button
+                        android:layout_width="324px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_register_shape"
+                        android:text="使用积分"
+                        android:textSize="40sp" />
+
+                    <LinearLayout
+                        android:layout_width="460px"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="right"
+                        android:background="@drawable/ll_border"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="116px"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="116px"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="第"
+                                android:textSize="40sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="116px"
+                                android:layout_weight="1"
+                                android:background="@drawable/tv_num_shape"
+                                android:gravity="center"
+                                android:text="8"
+                                android:textSize="40sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="116px"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="次"
+                                android:textSize="40sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="116px"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="洗"
+                                android:textSize="40sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="116px"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="衣"
+                                android:textSize="40sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="116px"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="116px"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="有"
+                                android:textSize="40sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="116px"
+                                android:layout_weight="1"
+                                android:background="@drawable/tv_num_shape"
+                                android:gravity="center"
+                                android:text="8"
+                                android:textSize="40sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="116px"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="次"
+                                android:textSize="40sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="116px"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="奖"
+                                android:textSize="40sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="116px"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="励"
+                                android:textSize="40sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="760px"
+                android:layout_height="570px"
+                android:layout_marginLeft="14px"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="760px"
+                    android:layout_height="190px"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_num_shape"
+                        android:text="1"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_num_shape"
+                        android:text="2"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_num_shape"
+                        android:text="3"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                    <Button
+                        android:layout_width="114px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_esc_shape"
+                        android:text="Esc"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/black"
+                        android:textSize="25sp" />
+
+                    <Button
+                        android:layout_width="76px"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_en_shape"
+                        android:text="En."
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="760px"
+                    android:layout_height="190px"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_num_shape"
+                        android:text="4"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_num_shape"
+                        android:text="5"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_num_shape"
+                        android:text="6"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_ok_shape"
+                        android:text="OK"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="760px"
+                    android:layout_height="190px"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_num_shape"
+                        android:text="7"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_num_shape"
+                        android:text="8"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_num_shape"
+                        android:text="9"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                    <Button
+                        android:layout_width="190px"
+                        android:layout_height="190px"
+                        android:layout_weight="1"
+                        android:background="@drawable/bt_num_shape"
+                        android:text="0"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1894px"
+            android:layout_height="456px"
+            android:baselineAligned="false"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="1894px"
+                android:layout_height="228px"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="1894px"
+                android:layout_height="228px"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="228px"
+                    android:layout_weight="1"
+                    android:background="@drawable/bt_img_washing_shape"
+                    android:text="7"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
