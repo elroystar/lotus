@@ -1,16 +1,18 @@
 package com.lotus.lotusapp;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 
 import java.io.File;
 
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
     // 定义RequestOptions
     private RequestOptions requestOptions = new RequestOptions()
-            .error(new ColorDrawable(Color.DKGRAY));
+            .error(R.drawable.ic_launcher_background);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,26 +43,34 @@ public class MainActivity extends AppCompatActivity {
         linearLayout = findViewById(R.id.body_background);
         Glide.with(this)
                 .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09", "body_background.png"))
-                .apply(requestOptions)
-                .into((Target) linearLayout);
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        linearLayout.setBackground(resource);
+                    }
+                });
         // 设置注册键
         imageButton = findViewById(R.id.ib_reg);
         Glide.with(this)
                 .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09", "ib_reg.png"))
                 .apply(requestOptions)
-                .into((Target) imageButton);
+                .into(imageButton);
         // 设置洗衣次数背景
         linearLayout = findViewById(R.id.member_times);
         Glide.with(this)
                 .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09", "member_times.png"))
-                .apply(requestOptions)
-                .into((Target) linearLayout);
+                .into(new SimpleTarget<Drawable>() {
+                    @Override
+                    public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                        linearLayout.setBackground(resource);
+                    }
+                });
         // 设置使用积分键
         imageButton = findViewById(R.id.use_integral);
         Glide.with(this)
                 .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09", "use_integral.png"))
                 .apply(requestOptions)
-                .into((Target) imageButton);
+                .into(imageButton);
         // 设置数字键
         loadNumBtn();
         // 设置洗衣机
