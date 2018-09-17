@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadWashingBtn() {
         imageButton = findViewById(R.id.ib_washing_1);
         Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_normal.png"))
+                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_normal1.png"))
                 .apply(requestOptions)
                 .into(imageButton);
         imageButton = findViewById(R.id.ib_washing_2);
@@ -130,9 +130,20 @@ public class MainActivity extends AppCompatActivity {
                 .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_invalid.png"))
                 .apply(requestOptions)
                 .into(imageButton);
+
         imageButton = findViewById(R.id.ib_washing_4);
         Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_ing.png"))
+                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_ing1.png"))
+                .apply(requestOptions)
+                .into(imageButton);
+        imageButton = findViewById(R.id.ib_washing_5);
+        Glide.with(this)
+                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_ing2.png"))
+                .apply(requestOptions)
+                .into(imageButton);
+        imageButton = findViewById(R.id.ib_washing_6);
+        Glide.with(this)
+                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_ing3.png"))
                 .apply(requestOptions)
                 .into(imageButton);
     }
