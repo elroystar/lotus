@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.a09);
+        setContentView(R.layout.activity_a09);
         // 加载按钮图片
         loadImageButton();
 
