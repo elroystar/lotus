@@ -130,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
                 .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_invalid.png"))
                 .apply(requestOptions)
                 .into(imageButton);
-
         imageButton = findViewById(R.id.ib_washing_4);
         Glide.with(this)
                 .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_ing1.png"))

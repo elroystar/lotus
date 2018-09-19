@@ -1,9 +1,310 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".B09Activity">
+    android:layout_width="1920px"
+    android:layout_height="1080px"
+    tools:context=".MainActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/body_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="13px"
+        android:layout_marginRight="13px"
+        android:layout_marginTop="17px"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="546px"
+            android:layout_height="1063px"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="318px"
+                android:layout_height="1063px"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="318px"
+                    android:layout_height="210px"
+                    android:background="@drawable/b09_bt_model_shape" />
+
+                <ImageButton
+                    android:layout_width="318px"
+                    android:layout_height="210px"
+                    android:background="@drawable/b09_bt_model_shape" />
+
+                <ImageButton
+                    android:layout_width="318px"
+                    android:layout_height="210px"
+                    android:background="@drawable/b09_bt_model_shape" />
+
+                <ImageButton
+                    android:layout_width="318px"
+                    android:layout_height="210px"
+                    android:background="@drawable/b09_bt_model_shape" />
+
+                <ImageButton
+                    android:layout_width="318px"
+                    android:layout_height="210px"
+                    android:background="@drawable/b09_bt_model_shape" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="228px"
+                android:layout_height="1063px"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="91px"
+                    android:layout_marginBottom="5px"
+                    android:background="@drawable/b09_bt_accessories_shape" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="181px"
+                    android:layout_marginBottom="5px"
+                    android:background="@drawable/b09_bt_accessories_shape" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="181px"
+                    android:layout_marginBottom="5px"
+                    android:background="@drawable/b09_bt_accessories_shape" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="181px"
+                    android:layout_marginBottom="5px"
+                    android:background="@drawable/b09_bt_accessories_shape" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="181px"
+                    android:layout_marginBottom="5px"
+                    android:background="@drawable/b09_bt_accessories_shape" />
+
+                <ImageButton
+                    android:layout_width="228px"
+                    android:layout_height="210px"
+                    android:background="@drawable/b09_bt_accessories_shape" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1348px"
+            android:layout_height="1063px"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="1348px"
+                android:layout_height="599px"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="228px"
+                    android:layout_height="599px"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:layout_width="228px"
+                        android:layout_height="228px"
+                        android:background="@drawable/b09_bt_machine_num_shape" />
+
+                    <ImageButton
+                        android:layout_width="228px"
+                        android:layout_height="371px"
+                        android:background="@drawable/b09_bt_sure_shape" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="1120px"
+                    android:layout_height="599px"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="1120px"
+                        android:layout_height="142px"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="112px"
+                            android:layout_height="142px"
+                            android:layout_weight="1"
+                            android:background="@drawable/b09_tv_num_shape"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textSize="55sp" />
+
+                        <TextView
+                            android:layout_width="112px"
+                            android:layout_height="142px"
+                            android:layout_weight="1"
+                            android:background="@drawable/b09_tv_num_shape"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textSize="55sp" />
+
+                        <TextView
+                            android:layout_width="112px"
+                            android:layout_height="142px"
+                            android:layout_weight="1"
+                            android:background="@drawable/b09_tv_num_shape"
+                            android:gravity="center"
+                            android:text="2"
+                            android:textSize="55sp" />
+
+                        <TextView
+                            android:layout_width="112px"
+                            android:layout_height="142px"
+                            android:layout_weight="1"
+                            android:background="@drawable/b09_tv_num_shape"
+                            android:gravity="center"
+                            android:text="3"
+                            android:textSize="55sp" />
+
+                        <TextView
+                            android:layout_width="112px"
+                            android:layout_height="142px"
+                            android:layout_weight="1"
+                            android:background="@drawable/b09_tv_num_shape"
+                            android:gravity="center"
+                            android:text="4"
+                            android:textSize="55sp" />
+
+                        <TextView
+                            android:layout_width="112px"
+                            android:layout_height="142px"
+                            android:layout_weight="1"
+                            android:background="@drawable/b09_tv_num_shape"
+                            android:gravity="center"
+                            android:text="5"
+                            android:textSize="55sp" />
+
+                        <TextView
+                            android:layout_width="112px"
+                            android:layout_height="142px"
+                            android:layout_weight="1"
+                            android:background="@drawable/b09_tv_num_shape"
+                            android:gravity="center"
+                            android:text="6"
+                            android:textSize="55sp" />
+
+                        <TextView
+                            android:layout_width="112px"
+                            android:layout_height="142px"
+                            android:layout_weight="1"
+                            android:background="@drawable/b09_tv_num_shape"
+                            android:gravity="center"
+                            android:text="7"
+                            android:textSize="55sp" />
+
+                        <TextView
+                            android:layout_width="112px"
+                            android:layout_height="142px"
+                            android:layout_weight="1"
+                            android:background="@drawable/b09_tv_num_shape"
+                            android:gravity="center"
+                            android:text="8"
+                            android:textSize="55sp" />
+
+                        <TextView
+                            android:layout_width="112px"
+                            android:layout_height="142px"
+                            android:layout_weight="1"
+                            android:background="@drawable/b09_tv_num_shape"
+                            android:gravity="center"
+                            android:text="9"
+                            android:textSize="55sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="1120px"
+                        android:layout_height="228px"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="313px"
+                            android:layout_height="180px"
+                            android:layout_marginTop="24px"
+                            android:layout_marginLeft="670px"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="313px"
+                                android:layout_height="180px"
+                                android:layout_weight="1"
+                                android:background="@drawable/b09_tv_price_shape"
+                                android:gravity="center"
+                                android:text="28.8"
+                                android:textSize="60sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="1120px"
+                        android:layout_height="228px"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="313px"
+                            android:layout_height="180px"
+                            android:layout_marginTop="24px"
+                            android:layout_marginLeft="670px"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="313px"
+                                android:layout_height="180px"
+                                android:layout_weight="1"
+                                android:background="@drawable/b09_tv_price_shape"
+                                android:gravity="center"
+                                android:text="30.0"
+                                android:textSize="60sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="1348px"
+                android:layout_height="452px"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="1120px"
+                    android:layout_height="452px"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="228px"
+                    android:layout_height="452px"
+                    android:orientation="horizontal">
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
