@@ -1,9 +1,708 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".C09Activity">
+    android:layout_width="1920px"
+    android:layout_height="1080px"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/body_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="13px"
+        android:layout_marginRight="13px"
+        android:layout_marginTop="17px"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="1890px"
+            android:layout_height="670px"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="343px"
+                android:layout_height="660px"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="343px"
+                    android:layout_height="550px"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="196px"
+                        android:layout_height="550px"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:layout_width="196px"
+                            android:layout_height="110px"
+                            android:background="@drawable/c09_bt_model_shape" />
+
+                        <ImageButton
+                            android:layout_width="196px"
+                            android:layout_height="110px"
+                            android:background="@drawable/c09_bt_model_shape" />
+
+                        <ImageButton
+                            android:layout_width="196px"
+                            android:layout_height="110px"
+                            android:background="@drawable/c09_bt_model_shape" />
+
+                        <ImageButton
+                            android:layout_width="196px"
+                            android:layout_height="110px"
+                            android:background="@drawable/c09_bt_model_shape" />
+
+                        <ImageButton
+                            android:layout_width="196px"
+                            android:layout_height="110px"
+                            android:background="@drawable/c09_bt_model_shape" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="147px"
+                        android:layout_height="550px"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:layout_width="147px"
+                            android:layout_height="110px"
+                            android:background="@drawable/c09_bt_switch_shape" />
+
+                        <ImageButton
+                            android:layout_width="147px"
+                            android:layout_height="110px"
+                            android:background="@drawable/c09_bt_switch_shape" />
+
+                        <ImageButton
+                            android:layout_width="147px"
+                            android:layout_height="110px"
+                            android:background="@drawable/c09_bt_switch_shape" />
+
+                        <ImageButton
+                            android:layout_width="147px"
+                            android:layout_height="110px"
+                            android:background="@drawable/c09_bt_switch_shape" />
+
+                        <ImageButton
+                            android:layout_width="147px"
+                            android:layout_height="110px"
+                            android:background="@drawable/c09_bt_switch_shape" />
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="343px"
+                    android:layout_height="110px"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:layout_width="343px"
+                        android:layout_height="110px"
+                        android:background="@drawable/c09_bt_short_program_shape" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="100px"
+                android:layout_height="670px"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="100px"
+                    android:layout_height="134px"
+                    android:background="@drawable/c09_bt_accessories_shape" />
+
+                <ImageButton
+                    android:layout_width="100px"
+                    android:layout_height="134px"
+                    android:background="@drawable/c09_bt_accessories_shape" />
+
+                <ImageButton
+                    android:layout_width="100px"
+                    android:layout_height="134px"
+                    android:background="@drawable/c09_bt_accessories_shape" />
+
+                <ImageButton
+                    android:layout_width="100px"
+                    android:layout_height="134px"
+                    android:background="@drawable/c09_bt_accessories_shape" />
+
+                <ImageButton
+                    android:layout_width="100px"
+                    android:layout_height="134px"
+                    android:background="@drawable/c09_bt_accessories_shape" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="250px"
+                android:layout_height="670px"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="250px"
+                    android:layout_height="67px"
+                    android:layout_weight="1"
+                    android:background="@drawable/c09_tv_price_shape"
+                    android:gravity="center"
+                    android:text="88.8"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="250px"
+                    android:layout_height="67px"
+                    android:layout_weight="1"
+                    android:background="@drawable/c09_tv_price_shape"
+                    android:gravity="center"
+                    android:text="88.8"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="250px"
+                    android:layout_height="67px"
+                    android:layout_weight="1"
+                    android:background="@drawable/c09_tv_price_shape"
+                    android:gravity="center"
+                    android:text="88.8"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="250px"
+                    android:layout_height="67px"
+                    android:layout_weight="1"
+                    android:background="@drawable/c09_tv_price_shape"
+                    android:gravity="center"
+                    android:text="88.8"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="250px"
+                    android:layout_height="67px"
+                    android:layout_weight="1"
+                    android:background="@drawable/c09_tv_price_shape"
+                    android:gravity="center"
+                    android:text="88.8"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="250px"
+                    android:layout_height="67px"
+                    android:layout_weight="1"
+                    android:background="@drawable/c09_tv_price_shape"
+                    android:gravity="center"
+                    android:text="88.8"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="250px"
+                    android:layout_height="67px"
+                    android:layout_weight="1"
+                    android:background="@drawable/c09_tv_price_shape"
+                    android:gravity="center"
+                    android:text="88.8"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="250px"
+                    android:layout_height="67px"
+                    android:layout_weight="1"
+                    android:background="@drawable/c09_tv_price_shape"
+                    android:gravity="center"
+                    android:text="88.8"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="250px"
+                    android:layout_height="67px"
+                    android:layout_weight="1"
+                    android:background="@drawable/c09_tv_price_shape"
+                    android:gravity="center"
+                    android:text="88.8"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:layout_width="250px"
+                    android:layout_height="67px"
+                    android:layout_weight="1"
+                    android:background="@drawable/c09_tv_price_shape"
+                    android:gravity="center"
+                    android:text="88.8"
+                    android:textSize="25sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="350px"
+                android:layout_height="670px"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="350px"
+                    android:layout_height="536px"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="100px"
+                        android:layout_height="670px"
+                        android:orientation="vertical">
+
+                        <ImageButton
+                            android:layout_width="100px"
+                            android:layout_height="134px"
+                            android:background="@drawable/c09_bt_accessories_shape" />
+
+                        <ImageButton
+                            android:layout_width="100px"
+                            android:layout_height="134px"
+                            android:background="@drawable/c09_bt_accessories_shape" />
+
+                        <ImageButton
+                            android:layout_width="100px"
+                            android:layout_height="134px"
+                            android:background="@drawable/c09_bt_accessories_shape" />
+
+                        <ImageButton
+                            android:layout_width="100px"
+                            android:layout_height="134px"
+                            android:background="@drawable/c09_bt_accessories_shape" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="250px"
+                        android:layout_height="536px"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="250px"
+                            android:layout_height="67px"
+                            android:layout_weight="1"
+                            android:background="@drawable/c09_tv_price_shape"
+                            android:gravity="center"
+                            android:text="88.8"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="250px"
+                            android:layout_height="67px"
+                            android:layout_weight="1"
+                            android:background="@drawable/c09_tv_price_shape"
+                            android:gravity="center"
+                            android:text="88.8"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="250px"
+                            android:layout_height="67px"
+                            android:layout_weight="1"
+                            android:background="@drawable/c09_tv_price_shape"
+                            android:gravity="center"
+                            android:text="88.8"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="250px"
+                            android:layout_height="67px"
+                            android:layout_weight="1"
+                            android:background="@drawable/c09_tv_price_shape"
+                            android:gravity="center"
+                            android:text="88.8"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="250px"
+                            android:layout_height="67px"
+                            android:layout_weight="1"
+                            android:background="@drawable/c09_tv_price_shape"
+                            android:gravity="center"
+                            android:text="88.8"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="250px"
+                            android:layout_height="67px"
+                            android:layout_weight="1"
+                            android:background="@drawable/c09_tv_price_shape"
+                            android:gravity="center"
+                            android:text="88.8"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="250px"
+                            android:layout_height="67px"
+                            android:layout_weight="1"
+                            android:background="@drawable/c09_tv_price_shape"
+                            android:gravity="center"
+                            android:text="88.8"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:layout_width="250px"
+                            android:layout_height="67px"
+                            android:layout_weight="1"
+                            android:background="@drawable/c09_tv_price_shape"
+                            android:gravity="center"
+                            android:text="88.8"
+                            android:textSize="25sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="350px"
+                    android:layout_height="134px"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="175px"
+                        android:layout_height="134px"
+                        android:background="@drawable/c09_bt_big_switch_shape" />
+
+                    <ImageButton
+                        android:layout_width="175px"
+                        android:layout_height="134px"
+                        android:background="@drawable/c09_bt_big_switch_shape" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="350px"
+                android:layout_height="670px"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="350px"
+                    android:layout_height="300px"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="350px"
+                        android:layout_height="100px"
+                        android:layout_weight="1"
+                        android:background="@drawable/c09_tv_price_shape"
+                        android:gravity="center"
+                        android:text="8888888888"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="350px"
+                        android:layout_height="100px"
+                        android:layout_weight="1"
+                        android:background="@drawable/c09_tv_price_shape"
+                        android:gravity="center"
+                        android:text="新1：888888"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:layout_width="350px"
+                        android:layout_height="100px"
+                        android:layout_weight="1"
+                        android:background="@drawable/c09_tv_price_shape"
+                        android:gravity="center"
+                        android:text="新2：888888"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="350px"
+                    android:layout_height="134px"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="175px"
+                        android:layout_height="134px"
+                        android:background="@drawable/c09_bt_sys_shape" />
+
+                    <ImageButton
+                        android:layout_width="175px"
+                        android:layout_height="134px"
+                        android:background="@drawable/c09_bt_sys_shape" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="350px"
+                    android:layout_height="238px"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:layout_width="116px"
+                        android:layout_height="238px"
+                        android:background="@drawable/c09_bt_big_switch_shape" />
+
+                    <ImageButton
+                        android:layout_width="116px"
+                        android:layout_height="238px"
+                        android:background="@drawable/c09_bt_accessories_shape" />
+
+                    <ImageButton
+                        android:layout_width="116px"
+                        android:layout_height="238px"
+                        android:background="@drawable/c09_bt_short_program_shape" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="167px"
+                android:layout_height="670px"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="167px"
+                android:layout_height="670px"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="167px"
+                android:layout_height="670px"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+                <ImageButton
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="1"
+                    android:textColor="@android:color/white"
+                    android:textSize="35sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1890px"
+            android:layout_height="189px"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="1890px"
+            android:layout_height="189px"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+            <ImageButton
+                android:layout_width="189px"
+                android:layout_height="189px"
+                android:background="@drawable/c09_bt_model_shape" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
