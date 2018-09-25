@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
                                 null);
                         if (cursor.getCount() > 0) {
                             // user实体赋值
-                            while (cursor.moveToFirst()) {
+                            while (cursor.moveToNext()) {
                                 user.setId(cursor.getInt(cursor.getColumnIndex("id")));
                                 user.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
                                 user.setReward_num(cursor.getString(cursor.getColumnIndex("reward_num")));
@@ -269,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
                                     null);
                             if (cursor.getCount() > 0) {
                                 // passwordRule赋值
-                                while (cursor.moveToFirst()) {
+                                while (cursor.moveToNext()) {
                                     passwordRule.setId(cursor.getInt(cursor.getColumnIndex("id")));
                                     passwordRule.setRule(cursor.getString(cursor.getColumnIndex("rule")));
                                     passwordRule.setState(cursor.getString(cursor.getColumnIndex("state")));
