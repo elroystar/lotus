@@ -422,15 +422,22 @@
                     android:layout_height="134px"
                     android:orientation="horizontal">
 
-                    <ImageButton
+                    <Button
+                        android:id="@+id/bt_home"
                         android:layout_width="175px"
                         android:layout_height="134px"
+                        android:text="安卓"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp"
                         android:background="@drawable/c09_bt_sys_shape" />
 
-                    <ImageButton
-                        android:id="@+id/ib_exit"
+                    <Button
+                        android:id="@+id/bt_exit"
                         android:layout_width="175px"
                         android:layout_height="134px"
+                        android:text="退出"
+                        android:textColor="@android:color/white"
+                        android:textSize="35sp"
                         android:background="@drawable/c09_bt_sys_shape" />
 
                 </LinearLayout>
@@ -464,82 +471,41 @@
                 android:layout_height="670px"
                 android:orientation="vertical">
 
-                <ImageButton
+                <Button
+                    android:id="@+id/bt_num_1"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
                     android:background="@drawable/a09_bt_num_shape"
                     android:text="1"
                     android:textColor="@android:color/white"
-                    android:textSize="35sp" />
+                    android:textSize="55sp" />
 
-                <ImageButton
+                <Button
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
                     android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
+                    android:text="4"
                     android:textColor="@android:color/white"
-                    android:textSize="35sp" />
+                    android:textSize="55sp" />
 
-                <ImageButton
+                <Button
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
                     android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
+                    android:text="7"
                     android:textColor="@android:color/white"
-                    android:textSize="35sp" />
+                    android:textSize="55sp" />
 
-                <ImageButton
+                <Button
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
                     android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
-                    android:textColor="@android:color/white"
-                    android:textSize="35sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="167px"
-                android:layout_height="670px"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:layout_width="167px"
-                    android:layout_height="167px"
-                    android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
-                    android:textColor="@android:color/white"
-                    android:textSize="35sp" />
-
-                <ImageButton
-                    android:layout_width="167px"
-                    android:layout_height="167px"
-                    android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
-                    android:textColor="@android:color/white"
-                    android:textSize="35sp" />
-
-                <ImageButton
-                    android:layout_width="167px"
-                    android:layout_height="167px"
-                    android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
-                    android:textColor="@android:color/white"
-                    android:textSize="35sp" />
-
-                <ImageButton
-                    android:layout_width="167px"
-                    android:layout_height="167px"
-                    android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
+                    android:text="Esc"
+                    android:textAllCaps="false"
                     android:textColor="@android:color/white"
                     android:textSize="35sp" />
 
@@ -550,39 +516,82 @@
                 android:layout_height="670px"
                 android:orientation="vertical">
 
-                <ImageButton
+                <Button
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
                     android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
+                    android:text="2"
                     android:textColor="@android:color/white"
-                    android:textSize="35sp" />
+                    android:textSize="55sp" />
 
-                <ImageButton
+                <Button
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
                     android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
+                    android:text="5"
                     android:textColor="@android:color/white"
-                    android:textSize="35sp" />
+                    android:textSize="55sp" />
 
-                <ImageButton
+                <Button
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
                     android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
+                    android:text="8"
                     android:textColor="@android:color/white"
-                    android:textSize="35sp" />
+                    android:textSize="55sp" />
 
-                <ImageButton
+                <Button
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
                     android:background="@drawable/a09_bt_num_shape"
-                    android:text="1"
+                    android:text="0"
+                    android:textColor="@android:color/white"
+                    android:textSize="55sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="167px"
+                android:layout_height="670px"
+                android:orientation="vertical">
+
+                <Button
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="3"
+                    android:textColor="@android:color/white"
+                    android:textSize="55sp" />
+
+                <Button
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="6"
+                    android:textColor="@android:color/white"
+                    android:textSize="55sp" />
+
+                <Button
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="9"
+                    android:textColor="@android:color/white"
+                    android:textSize="55sp" />
+
+                <Button
+                    android:layout_width="167px"
+                    android:layout_height="167px"
+                    android:layout_weight="1"
+                    android:background="@drawable/a09_bt_num_shape"
+                    android:text="OK"
                     android:textColor="@android:color/white"
                     android:textSize="35sp" />
 

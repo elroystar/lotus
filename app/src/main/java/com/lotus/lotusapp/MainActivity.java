@@ -10,12 +10,14 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -66,124 +68,64 @@ public class MainActivity extends AppCompatActivity {
      */
     private void functionNumButton() {
         // 数字键
-        findViewById(R.id.ib_num_0).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ib_num_0).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (stringTx.length() < 10) {
-                    // 获取textView id
-                    int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
-                    TextView tv = findViewById(tx_num_id);
-                    tv.setText("0");
-                }
-                stringTx = stringTx + "0";
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchNumFunction(v, event, R.id.ib_num_0, "0", "ib_num_0.png");
             }
         });
-        findViewById(R.id.ib_num_1).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ib_num_1).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (stringTx.length() < 10) {
-                    // 获取textView id
-                    int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
-                    TextView tv = findViewById(tx_num_id);
-                    tv.setText("1");
-                }
-                stringTx = stringTx + "1";
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchNumFunction(v, event, R.id.ib_num_1, "1", "ib_num_1.png");
             }
         });
-        findViewById(R.id.ib_num_2).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ib_num_2).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (stringTx.length() < 10) {
-                    // 获取textView id
-                    int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
-                    TextView tv = findViewById(tx_num_id);
-                    tv.setText("2");
-                }
-                stringTx = stringTx + "2";
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchNumFunction(v, event, R.id.ib_num_2, "2", "ib_num_2.png");
             }
         });
-        findViewById(R.id.ib_num_3).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ib_num_3).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (stringTx.length() < 10) {
-                    // 获取textView id
-                    int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
-                    TextView tv = findViewById(tx_num_id);
-                    tv.setText("3");
-                }
-                stringTx = stringTx + "3";
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchNumFunction(v, event, R.id.ib_num_3, "3", "ib_num_3.png");
             }
         });
-        findViewById(R.id.ib_num_4).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ib_num_4).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (stringTx.length() < 10) {
-                    // 获取textView id
-                    int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
-                    TextView tv = findViewById(tx_num_id);
-                    tv.setText("4");
-                }
-                stringTx = stringTx + "4";
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchNumFunction(v, event, R.id.ib_num_4, "4", "ib_num_4.png");
             }
         });
-        findViewById(R.id.ib_num_5).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ib_num_5).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (stringTx.length() < 10) {
-                    // 获取textView id
-                    int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
-                    TextView tv = findViewById(tx_num_id);
-                    tv.setText("5");
-                }
-                stringTx = stringTx + "5";
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchNumFunction(v, event, R.id.ib_num_5, "5", "ib_num_5.png");
             }
         });
-        findViewById(R.id.ib_num_6).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ib_num_6).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (stringTx.length() < 10) {
-                    // 获取textView id
-                    int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
-                    TextView tv = findViewById(tx_num_id);
-                    tv.setText("6");
-                }
-                stringTx = stringTx + "6";
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchNumFunction(v, event, R.id.ib_num_6, "6", "ib_num_6.png");
             }
         });
-        findViewById(R.id.ib_num_7).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ib_num_7).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (stringTx.length() < 10) {
-                    // 获取textView id
-                    int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
-                    TextView tv = findViewById(tx_num_id);
-                    tv.setText("7");
-                }
-                stringTx = stringTx + "7";
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchNumFunction(v, event, R.id.ib_num_7, "7", "ib_num_7.png");
             }
         });
-        findViewById(R.id.ib_num_8).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ib_num_8).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (stringTx.length() < 10) {
-                    // 获取textView id
-                    int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
-                    TextView tv = findViewById(tx_num_id);
-                    tv.setText("8");
-                }
-                stringTx = stringTx + "8";
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchNumFunction(v, event, R.id.ib_num_8, "8", "ib_num_8.png");
             }
         });
-        findViewById(R.id.ib_num_9).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ib_num_9).setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                if (stringTx.length() < 10) {
-                    // 获取textView id
-                    int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
-                    TextView tv = findViewById(tx_num_id);
-                    tv.setText("9");
-                }
-                stringTx = stringTx + "9";
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchNumFunction(v, event, R.id.ib_num_9, "9", "ib_num_9.png");
             }
         });
         // Esc键
@@ -223,10 +165,10 @@ public class MainActivity extends AppCompatActivity {
                             while (cursor.moveToNext()) {
                                 user.setId(cursor.getInt(cursor.getColumnIndex("id")));
                                 user.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
-                                user.setReward_num(cursor.getString(cursor.getColumnIndex("reward_num")));
-                                user.setReward_total(cursor.getString(cursor.getColumnIndex("reward_total")));
-                                user.setWashing_num(cursor.getString(cursor.getColumnIndex("washing_num")));
-                                user.setWashing_total(cursor.getString(cursor.getColumnIndex("washing_total")));
+                                user.setReward_num(cursor.getInt(cursor.getColumnIndex("reward_num")));
+                                user.setReward_total(cursor.getInt(cursor.getColumnIndex("reward_total")));
+                                user.setWashing_num(cursor.getInt(cursor.getColumnIndex("washing_num")));
+                                user.setWashing_total(cursor.getInt(cursor.getColumnIndex("washing_total")));
                             }
                             // 显示洗衣次数及奖励
                             TextView tv = findViewById(R.id.tx_washing);
@@ -308,6 +250,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * 数字键触摸逻辑控制
+     *
+     * @param v
+     * @param event
+     * @param ib_num
+     * @param txStr
+     * @param imgStr
+     * @return
+     */
+    private boolean onTouchNumFunction(View v, MotionEvent event, int ib_num, String txStr, String imgStr) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            // 重新设置按下时的背景图片
+            loadImage(ib_num, Glide.with(v), "cg", "ib_num_OK.png");
+            if (stringTx.length() < 10) {
+                // 获取textView id
+                int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
+                TextView tv = findViewById(tx_num_id);
+                tv.setText(txStr);
+            }
+            stringTx = stringTx + txStr;
+        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+            // 再修改为抬起时的正常图片
+            loadImage(ib_num, Glide.with(v), "cg", imgStr);
+        }
+        return false;
+    }
+
+    /**
      * 加载按钮图片
      */
     private void loadImageButton() {
@@ -364,55 +334,34 @@ public class MainActivity extends AppCompatActivity {
                     .apply(requestOptions)
                     .into(imageButton);
         }
-        imageButton = findViewById(R.id.ib_num_en);
-        Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "cg", "ib_num_En.png"))
-                .apply(requestOptions)
-                .into(imageButton);
-        imageButton = findViewById(R.id.ib_num_esc);
-        Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "cg", "ib_num_Esc.png"))
-                .apply(requestOptions)
-                .into(imageButton);
-        imageButton = findViewById(R.id.ib_num_ok);
-        Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "cg", "ib_num_OK.png"))
-                .apply(requestOptions)
-                .into(imageButton);
+        loadImage(R.id.ib_num_en, Glide.with(this), "cg", "ib_num_En.png");
+        loadImage(R.id.ib_num_esc, Glide.with(this), "cg", "ib_num_Esc.png");
+        loadImage(R.id.ib_num_ok, Glide.with(this), "cg", "ib_num_OK.png");
     }
 
     /**
      * 加载洗衣机键
      */
     private void loadWashingBtn() {
-        imageButton = findViewById(R.id.ib_washing_1);
-        Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_normal1.png"))
-                .apply(requestOptions)
-                .into(imageButton);
-        imageButton = findViewById(R.id.ib_washing_2);
-        Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_damaged.png"))
-                .apply(requestOptions)
-                .into(imageButton);
-        imageButton = findViewById(R.id.ib_washing_3);
-        Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_invalid.png"))
-                .apply(requestOptions)
-                .into(imageButton);
-        imageButton = findViewById(R.id.ib_washing_4);
-        Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_ing1.png"))
-                .apply(requestOptions)
-                .into(imageButton);
-        imageButton = findViewById(R.id.ib_washing_5);
-        Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_ing2.png"))
-                .apply(requestOptions)
-                .into(imageButton);
-        imageButton = findViewById(R.id.ib_washing_6);
-        Glide.with(this)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "wash", "ib_wash_ing3.png"))
+        loadImage(R.id.ib_washing_1, Glide.with(this), "wash", "ib_wash_normal1.png");
+        loadImage(R.id.ib_washing_2, Glide.with(this), "wash", "ib_wash_damaged.png");
+        loadImage(R.id.ib_washing_3, Glide.with(this), "wash", "ib_wash_invalid.png");
+        loadImage(R.id.ib_washing_4, Glide.with(this), "wash", "ib_wash_ing1.png");
+        loadImage(R.id.ib_washing_5, Glide.with(this), "wash", "ib_wash_ing2.png");
+        loadImage(R.id.ib_washing_6, Glide.with(this), "wash", "ib_wash_ing3.png");
+    }
+
+    /**
+     * 加载图片
+     * @param ib_washing
+     * @param with
+     * @param wash
+     * @param imgStr
+     */
+    private void loadImage(int ib_washing, RequestManager with, String wash, String imgStr) {
+        imageButton = findViewById(ib_washing);
+        with
+                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + wash, imgStr))
                 .apply(requestOptions)
                 .into(imageButton);
     }

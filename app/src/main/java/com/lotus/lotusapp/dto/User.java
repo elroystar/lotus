@@ -14,13 +14,13 @@ public class User implements Parcelable {
 
     private String phone;
 
-    private String washing_num;
+    private Integer washing_num;
 
-    private String washing_total;
+    private Integer washing_total;
 
-    private String reward_num;
+    private Integer reward_num;
 
-    private String reward_total;
+    private Integer reward_total;
 
     private Date create_time;
 
@@ -30,17 +30,33 @@ public class User implements Parcelable {
 
     }
 
-    public User(Parcel in) {
+    protected User(Parcel in) {
         if (in.readByte() == 0) {
             id = null;
         } else {
             id = in.readInt();
         }
         phone = in.readString();
-        washing_num = in.readString();
-        washing_total = in.readString();
-        reward_num = in.readString();
-        reward_total = in.readString();
+        if (in.readByte() == 0) {
+            washing_num = null;
+        } else {
+            washing_num = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            washing_total = null;
+        } else {
+            washing_total = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            reward_num = null;
+        } else {
+            reward_num = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            reward_total = null;
+        } else {
+            reward_total = in.readInt();
+        }
     }
 
     public static final Creator<User> CREATOR = new Creator<User>() {
@@ -71,35 +87,35 @@ public class User implements Parcelable {
         this.phone = phone;
     }
 
-    public String getWashing_num() {
+    public Integer getWashing_num() {
         return washing_num;
     }
 
-    public void setWashing_num(String washing_num) {
+    public void setWashing_num(Integer washing_num) {
         this.washing_num = washing_num;
     }
 
-    public String getWashing_total() {
+    public Integer getWashing_total() {
         return washing_total;
     }
 
-    public void setWashing_total(String washing_total) {
+    public void setWashing_total(Integer washing_total) {
         this.washing_total = washing_total;
     }
 
-    public String getReward_num() {
+    public Integer getReward_num() {
         return reward_num;
     }
 
-    public void setReward_num(String reward_num) {
+    public void setReward_num(Integer reward_num) {
         this.reward_num = reward_num;
     }
 
-    public String getReward_total() {
+    public Integer getReward_total() {
         return reward_total;
     }
 
-    public void setReward_total(String reward_total) {
+    public void setReward_total(Integer reward_total) {
         this.reward_total = reward_total;
     }
 
@@ -133,9 +149,29 @@ public class User implements Parcelable {
             dest.writeInt(id);
         }
         dest.writeString(phone);
-        dest.writeString(washing_num);
-        dest.writeString(washing_total);
-        dest.writeString(reward_num);
-        dest.writeString(reward_total);
+        if (washing_num == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(washing_num);
+        }
+        if (washing_total == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(washing_total);
+        }
+        if (reward_num == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(reward_num);
+        }
+        if (reward_total == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(reward_total);
+        }
     }
 }
