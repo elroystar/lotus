@@ -194,11 +194,7 @@ public class MainActivity extends AppCompatActivity {
                                 null,
                                 null);
                         if (cursor.getCount() > 0) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                            builder.setTitle("Tips");
-                            builder.setMessage("请验证后重新输入");
-                            builder.setPositiveButton("OK", null);
-                            builder.show();
+                            alertMsg("Tips", "请验证后重新输入！");
                         } else {
                             // 获取密码规则
                             // select * from password_rule where state = '1'
@@ -225,18 +221,10 @@ public class MainActivity extends AppCompatActivity {
                                     i.putExtra("passwordRule", passwordRule);
                                     startActivity(i);
                                 } else {
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                    builder.setTitle("Tips");
-                                    builder.setMessage("请验证后重新输入");
-                                    builder.setPositiveButton("OK", null);
-                                    builder.show();
+                                    alertMsg("Tips", "请验证后重新输入！");
                                 }
                             } else {
-                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                builder.setTitle("Error");
-                                builder.setMessage("查询不到密码规则");
-                                builder.setPositiveButton("OK", null);
-                                builder.show();
+                                alertMsg("Error", "查询不到密码规则！");
                             }
                         }
                     }
@@ -364,5 +352,18 @@ public class MainActivity extends AppCompatActivity {
                 .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + wash, imgStr))
                 .apply(requestOptions)
                 .into(imageButton);
+    }
+
+    /**
+     * 弹框提示
+     * @param tips
+     * @param msg
+     */
+    private void alertMsg(String tips, String msg) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(tips);
+        builder.setMessage(msg);
+        builder.setPositiveButton("OK", null);
+        builder.show();
     }
 }

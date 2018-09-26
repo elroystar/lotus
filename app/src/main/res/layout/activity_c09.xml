@@ -389,6 +389,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_password"
                         android:layout_width="350px"
                         android:layout_height="100px"
                         android:layout_weight="1"
@@ -398,6 +399,7 @@
                         android:textSize="25sp" />
 
                     <TextView
+                        android:id="@+id/tv_password_new_one"
                         android:layout_width="350px"
                         android:layout_height="100px"
                         android:layout_weight="1"
@@ -407,6 +409,7 @@
                         android:textSize="25sp" />
 
                     <TextView
+                        android:id="@+id/tv_password_new_two"
                         android:layout_width="350px"
                         android:layout_height="100px"
                         android:layout_weight="1"
@@ -476,34 +479,37 @@
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="1"
                     android:textColor="@android:color/white"
                     android:textSize="55sp" />
 
                 <Button
+                    android:id="@+id/bt_num_4"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="4"
                     android:textColor="@android:color/white"
                     android:textSize="55sp" />
 
                 <Button
+                    android:id="@+id/bt_num_7"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="7"
                     android:textColor="@android:color/white"
                     android:textSize="55sp" />
 
                 <Button
+                    android:id="@+id/bt_num_esc"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="Esc"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
@@ -517,37 +523,41 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/bt_num_2"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="2"
                     android:textColor="@android:color/white"
                     android:textSize="55sp" />
 
                 <Button
+                    android:id="@+id/bt_num_5"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="5"
                     android:textColor="@android:color/white"
                     android:textSize="55sp" />
 
                 <Button
+                    android:id="@+id/bt_num_8"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="8"
                     android:textColor="@android:color/white"
                     android:textSize="55sp" />
 
                 <Button
+                    android:id="@+id/bt_num_0"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="0"
                     android:textColor="@android:color/white"
                     android:textSize="55sp" />
@@ -560,37 +570,41 @@
                 android:orientation="vertical">
 
                 <Button
+                    android:id="@+id/bt_num_3"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="3"
                     android:textColor="@android:color/white"
                     android:textSize="55sp" />
 
                 <Button
+                    android:id="@+id/bt_num_6"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="6"
                     android:textColor="@android:color/white"
                     android:textSize="55sp" />
 
                 <Button
+                    android:id="@+id/bt_num_9"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="9"
                     android:textColor="@android:color/white"
                     android:textSize="55sp" />
 
                 <Button
+                    android:id="@+id/bt_num_ok"
                     android:layout_width="167px"
                     android:layout_height="167px"
                     android:layout_weight="1"
-                    android:background="@drawable/a09_bt_num_shape"
+                    android:background="@drawable/c09_bt_num_selector"
                     android:text="OK"
                     android:textColor="@android:color/white"
                     android:textSize="35sp" />
