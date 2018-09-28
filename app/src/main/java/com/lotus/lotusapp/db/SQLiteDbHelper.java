@@ -11,7 +11,7 @@ import com.lotus.lotusapp.utils.DateUtil;
  */
 public class SQLiteDbHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
     private static final String DB_NAME = "lotusDB";
     private static final String TABLE_USER = "user";
     private static final String TABLE_PASSWORD_BANK = "password_bank";
@@ -46,7 +46,6 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             + "id integer primary key autoincrement,"
             + "num varchar(2) not null,"
             + "state varchar(2) not null default 1,"
-            + "state varchar(2) not null default 1,"
             + "create_time timestamp default (datetime('now','localtime')),"
             + "update_time timestamp default (datetime('now','localtime'))"
             + ");";
@@ -75,6 +74,18 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        db.execSQL("drop table user");
+        db.execSQL("drop table password_bank");
+        db.execSQL("drop table password_rule");
+
+        db.execSQL(USER_CREATE_TABLE_SQL);
+        // 创建 password_bank 表
+        db.execSQL(PASSWORD_BANK_CREATE_TABLE_SQL);
+        // 创建 password_rule 表
+        db.execSQL(PASSWORD_RULE_CREATE_TABLE_SQL);
+        // 添加默认密码规则
+        db.execSQL(PASSWORD_RULE_INSERT_DEFAULT_SQL);
 
     }
 }

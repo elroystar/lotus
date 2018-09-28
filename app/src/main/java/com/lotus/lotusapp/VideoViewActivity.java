@@ -3,11 +3,11 @@ package com.lotus.lotusapp;
 import android.app.Activity;
 import android.os.Bundle;
 
-public class B09Activity extends Activity {
+public class VideoViewActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_b09);
+        setContentView(R.layout.activity_video_view);
     }
 }

@@ -1,10 +1,13 @@
 package com.lotus.lotusapp;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -12,21 +15,27 @@ import android.widget.TextView;
 import com.lotus.lotusapp.db.SQLiteDbHelper;
 import com.lotus.lotusapp.dto.PasswordRule;
 
-public class C09Activity extends AppCompatActivity {
+public class C09Activity extends Activity {
 
     public static final String MODIFY_PASSWORD = "modify_password";
     public static final String OUT_MONEY = "out_money";
     public static final String PRICE = "price";
     public static final String TEST = "test";
 
-    // C界面模式选择，默认为""为修改密码模式
+    // C界面模式选择，默认为修改密码模式
     private String model = MODIFY_PASSWORD;
 
     // 密码规则
     private PasswordRule passwordRule;
 
-    // 数据连接工具
+    // 数据库连接工具
     private SQLiteDbHelper sqLiteDbHelper;
+
+    // 声明soundPool
+    private SoundPool soundPool;
+
+    // 定义一个整型用load(),来设置soundID
+    private int music;
 
     private String newPasswordOne = "";
     private String newPasswordTwo = "";
@@ -35,10 +44,14 @@ public class C09Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_c09);
+        // 加载声音
+        initSound();
         // 获取显示密码规则
         showPasswordRule();
         // 数字键盘区按钮逻辑
         functionNumButton();
+        // 定价键区按钮逻辑
+        functionPriceButton();
         // 退出C界面
         findViewById(R.id.bt_exit).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,12 +64,35 @@ public class C09Activity extends AppCompatActivity {
         findViewById(R.id.bt_home).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_MAIN);
+//                moveTaskToBack(true);
+                // 将应用退到桌面上，保留自身
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addCategory(Intent.CATEGORY_HOME);
                 startActivity(intent);
             }
         });
+    }
+
+    /**
+     * 定价键区按钮逻辑
+     */
+    private void functionPriceButton() {
+        findViewById(R.id.bt_accessories).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // 播放按键声音
+                    playSound();
+                    // 修改模式
+                    model = PRICE;
+                    // 定价按钮常亮
+                    v.setBackgroundColor(Color.parseColor("#F8F8FF"));
+                }
+                return false;
+            }
+        });
+
     }
 
     /**
@@ -418,5 +454,20 @@ public class C09Activity extends AppCompatActivity {
             TextView tv = findViewById(R.id.tv_password_new_two);
             tv.setText(newPasswordTwo);
         }
+    }
+
+    /**
+     * 加载声音
+     */
+    private void initSound() {
+        soundPool = new SoundPool(5, AudioManager.STREAM_SYSTEM, 0);
+        music = soundPool.load(this, R.raw.music1, 1);
+    }
+
+    /**
+     * 播放声音
+     */
+    private void playSound() {
+        soundPool.play(music, 1, 1, 1, 0, 1);
     }
 }

@@ -1,15 +1,17 @@
 package com.lotus.lotusapp;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -17,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
@@ -28,7 +29,7 @@ import com.lotus.lotusapp.utils.PasswordRuleUtil;
 
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     // 图片按钮定义
     private ImageButton imageButton;
@@ -39,7 +40,13 @@ public class MainActivity extends AppCompatActivity {
     // 数字输入框字符串
     private String stringTx = "";
 
-    // 数据连接工具
+    // 声明soundPool
+    private SoundPool soundPool;
+
+    // 定义一个整型用load(),来设置soundID
+    private int music;
+
+    // 数据库连接工具
     private SQLiteDbHelper sqLiteDbHelper;
 
     // User实体类定义
@@ -56,11 +63,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_a09);
+        // 加载声音
+        initSound();
         // 加载按钮图片
         loadImageButton();
         // 数字键盘区按钮逻辑
         functionNumButton();
 
+    }
+
+    /**
+     * 加载声音
+     */
+    private void initSound() {
+        soundPool = new SoundPool(5, AudioManager.STREAM_SYSTEM, 0);
+        music = soundPool.load(this, R.raw.music1, 1);
+    }
+
+    /**
+     * 播放声音
+     */
+    private void playSound() {
+        soundPool.play(music, 1, 1, 1, 0, 1);
     }
 
     /**
@@ -132,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.ib_num_esc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 播放按键声音
+                playSound();
                 for (int i = 0; i < 10; i++) {
                     // 获取textView id
                     int tx_num_id = getResources().getIdentifier("tx_num_" + i, "id", getPackageName());
@@ -145,6 +171,8 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.ib_num_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 播放按键声音
+                playSound();
                 // 查询数据库
                 sqLiteDbHelper = new SQLiteDbHelper(getApplicationContext());
                 SQLiteDatabase dbRead = sqLiteDbHelper.getReadableDatabase();
@@ -249,8 +277,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean onTouchNumFunction(View v, MotionEvent event, int ib_num, String txStr, String imgStr) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            // 播放按键声音
+            playSound();
             // 重新设置按下时的背景图片
-            loadImage(ib_num, Glide.with(v), "cg", "ib_num_OK.png");
+            loadImage(ib_num, this, "cg", "ib_num_OK.png");
             if (stringTx.length() < 10) {
                 // 获取textView id
                 int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
@@ -260,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
             stringTx = stringTx + txStr;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             // 再修改为抬起时的正常图片
-            loadImage(ib_num, Glide.with(v), "cg", imgStr);
+            loadImage(ib_num, this, "cg", imgStr);
         }
         return false;
     }
@@ -322,33 +352,34 @@ public class MainActivity extends AppCompatActivity {
                     .apply(requestOptions)
                     .into(imageButton);
         }
-        loadImage(R.id.ib_num_en, Glide.with(this), "cg", "ib_num_En.png");
-        loadImage(R.id.ib_num_esc, Glide.with(this), "cg", "ib_num_Esc.png");
-        loadImage(R.id.ib_num_ok, Glide.with(this), "cg", "ib_num_OK.png");
+        loadImage(R.id.ib_num_en, this, "cg", "ib_num_En.png");
+        loadImage(R.id.ib_num_esc, this, "cg", "ib_num_Esc.png");
+        loadImage(R.id.ib_num_ok, this, "cg", "ib_num_OK.png");
     }
 
     /**
      * 加载洗衣机键
      */
     private void loadWashingBtn() {
-        loadImage(R.id.ib_washing_1, Glide.with(this), "wash", "ib_wash_normal1.png");
-        loadImage(R.id.ib_washing_2, Glide.with(this), "wash", "ib_wash_damaged.png");
-        loadImage(R.id.ib_washing_3, Glide.with(this), "wash", "ib_wash_invalid.png");
-        loadImage(R.id.ib_washing_4, Glide.with(this), "wash", "ib_wash_ing1.png");
-        loadImage(R.id.ib_washing_5, Glide.with(this), "wash", "ib_wash_ing2.png");
-        loadImage(R.id.ib_washing_6, Glide.with(this), "wash", "ib_wash_ing3.png");
+        loadImage(R.id.ib_washing_1, this, "wash", "ib_wash_normal1.png");
+        loadImage(R.id.ib_washing_2, this, "wash", "ib_wash_damaged.png");
+        loadImage(R.id.ib_washing_3, this, "wash", "ib_wash_invalid.png");
+        loadImage(R.id.ib_washing_4, this, "wash", "ib_wash_ing1.png");
+        loadImage(R.id.ib_washing_5, this, "wash", "ib_wash_ing2.png");
+        loadImage(R.id.ib_washing_6, this, "wash", "ib_wash_ing3.png");
     }
 
     /**
      * 加载图片
+     *
      * @param ib_washing
-     * @param with
+     * @param activity
      * @param wash
      * @param imgStr
      */
-    private void loadImage(int ib_washing, RequestManager with, String wash, String imgStr) {
+    private void loadImage(int ib_washing, Activity activity, String wash, String imgStr) {
         imageButton = findViewById(ib_washing);
-        with
+        Glide.with(activity)
                 .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + wash, imgStr))
                 .apply(requestOptions)
                 .into(imageButton);
@@ -356,6 +387,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 弹框提示
+     *
      * @param tips
      * @param msg
      */

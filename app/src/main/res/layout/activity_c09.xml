@@ -450,19 +450,28 @@
                     android:layout_height="238px"
                     android:orientation="horizontal">
 
-                    <ImageButton
+                    <Button
+                        android:id="@+id/bt_big_switch"
                         android:layout_width="116px"
                         android:layout_height="238px"
+                        android:text="出币"
+                        android:textSize="35sp"
                         android:background="@drawable/c09_bt_big_switch_shape" />
 
-                    <ImageButton
+                    <Button
+                        android:id="@+id/bt_accessories"
                         android:layout_width="116px"
                         android:layout_height="238px"
+                        android:text="定价"
+                        android:textSize="35sp"
                         android:background="@drawable/c09_bt_accessories_shape" />
 
-                    <ImageButton
+                    <Button
+                        android:id="@+id/bt_short_program"
                         android:layout_width="116px"
                         android:layout_height="238px"
+                        android:text="测试"
+                        android:textSize="35sp"
                         android:background="@drawable/c09_bt_short_program_shape" />
 
                 </LinearLayout>
