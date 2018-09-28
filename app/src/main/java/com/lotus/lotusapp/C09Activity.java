@@ -21,9 +21,11 @@ public class C09Activity extends Activity {
     public static final String OUT_MONEY = "out_money";
     public static final String PRICE = "price";
     public static final String TEST = "test";
+    public static final String WASHING_MACHINE = "washing_machine";
+    public static final String COIN_BOX = "coin_box";
 
     // C界面模式选择，默认为修改密码模式
-    private String model = MODIFY_PASSWORD;
+    private String model = "";
 
     // 密码规则
     private PasswordRule passwordRule;
@@ -37,6 +39,24 @@ public class C09Activity extends Activity {
     // 定义一个整型用load(),来设置soundID
     private int music;
 
+    /**
+     * textView选中判断条件
+     * 1：新1修改密码
+     * 2：新2修改密码
+     * 3：
+     * 4：
+     * 5：
+     * 6：
+     * 7：
+     * 8：
+     * 9：
+     * 10：
+      */
+    private String getTvSelectModel = "";
+
+    /**
+     * 修改密码区逻辑
+     */
     private String newPasswordOne = "";
     private String newPasswordTwo = "";
 
@@ -48,6 +68,10 @@ public class C09Activity extends Activity {
         initSound();
         // 获取显示密码规则
         showPasswordRule();
+        // 置灰不可选择按钮
+        ashNoChoiceButton(model);
+        // 修改密码逻辑
+        functionModifyPassword();
         // 数字键盘区按钮逻辑
         functionNumButton();
         // 定价键区按钮逻辑
@@ -75,9 +99,137 @@ public class C09Activity extends Activity {
     }
 
     /**
+     * 置灰不可选择按钮
+     * @param model
+     */
+    private void ashNoChoiceButton(String model) {
+        switch (model) {
+            case OUT_MONEY:
+                ashOutMoneyButton();
+                break;
+            case PRICE:
+                ashPriceButton();
+                break;
+            case TEST:
+                ashTestButton();
+                break;
+            case WASHING_MACHINE:
+                ashWashingMachineButton();
+                break;
+            case COIN_BOX:
+                ashCoinBoxButton();
+                break;
+            default:
+                ashOutMoneyButton();
+                ashPriceButton();
+                ashTestButton();
+                ashWashingMachineButton();
+                ashCoinBoxButton();
+                break;
+        }
+    }
+
+    /**
+     * 置灰投币箱
+     */
+    private void ashCoinBoxButton() {
+        for (int i = 1; i <= 4; i++) {
+            // 获取textView id
+            int bt_coin_box = getResources().getIdentifier("bt_coin_box_" + i, "id", getPackageName());
+            findViewById(bt_coin_box).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        }
+    }
+
+    /**
+     * 置灰洗衣机
+     */
+    private void ashWashingMachineButton() {
+        for (int i = 1; i <= 16; i++) {
+            // 获取textView id
+            int bt_washing_machine = getResources().getIdentifier("bt_washing_machine_" + i, "id", getPackageName());
+            findViewById(bt_washing_machine).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        }
+    }
+
+    /**
+     * 置灰测试项目
+     */
+    private void ashTestButton() {
+        findViewById(R.id.bt_test_disinfection).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_test_disinfection_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_test_washing_liquid).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_test_washing_liquid_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_test_softening).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_test_softening_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_test_inlet).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_test_inlet_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_test_drain).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_test_drain_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_test_short_program).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+    }
+
+    /**
+     * 置灰定价项目
+     */
+    private void ashPriceButton() {
+        findViewById(R.id.bt_drying).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_rinse).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_cowboy).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_sheets).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_standard).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_washing_liquid).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_softening).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_disinfection_ing).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_disinfection_before).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+    }
+
+    /**
+     * 置灰出币开关
+     */
+    private void ashOutMoneyButton() {
+        findViewById(R.id.bt_on_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        findViewById(R.id.bt_un_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+    }
+
+    /**
+     * 修改密码逻辑
+     */
+    private void functionModifyPassword() {
+        findViewById(R.id.tv_password_new_one).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // 修改密码模式
+                    model = MODIFY_PASSWORD;
+                    getTvSelectModel = "1";
+                    // 新1显示框亮起
+                    v.setBackgroundResource(R.drawable.c09_tv_select_shape);
+                    findViewById(R.id.tv_password_new_two).setBackgroundResource(R.drawable.c09_tv_price_shape);
+                }
+                return false;
+            }
+        });
+        findViewById(R.id.tv_password_new_two).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // 修改密码模式
+                    model = MODIFY_PASSWORD;
+                    getTvSelectModel = "2";
+                    // 新2显示框亮起
+                    v.setBackgroundResource(R.drawable.c09_tv_select_shape);
+                    findViewById(R.id.tv_password_new_one).setBackgroundResource(R.drawable.c09_tv_price_shape);
+                }
+                return false;
+            }
+        });
+    }
+
+    /**
      * 定价键区按钮逻辑
      */
     private void functionPriceButton() {
+        // 定价按钮
         findViewById(R.id.bt_accessories).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -87,11 +239,13 @@ public class C09Activity extends Activity {
                     // 修改模式
                     model = PRICE;
                     // 定价按钮常亮
-                    v.setBackgroundColor(Color.parseColor("#F8F8FF"));
+                    v.setBackgroundColor(Color.parseColor("#ADFF2F"));
                 }
                 return false;
             }
         });
+        // 刷干按钮
+
 
     }
 
@@ -419,10 +573,13 @@ public class C09Activity extends Activity {
     private void resetModifyPassword() {
         newPasswordOne = "";
         newPasswordTwo = "";
+        getTvSelectModel = "";
         TextView tv = findViewById(R.id.tv_password_new_one);
+        tv.setBackgroundResource(R.drawable.c09_tv_price_shape);
         tv.setText(passwordRule.getRule());
         tv = findViewById(R.id.tv_password_new_two);
         tv.setText(passwordRule.getRule());
+        tv.setBackgroundResource(R.drawable.c09_tv_price_shape);
     }
 
     /**
@@ -445,11 +602,12 @@ public class C09Activity extends Activity {
      * @param num
      */
     private void modifyPassword(String num) {
-        if (newPasswordOne.length() <= 5) {
+        if (newPasswordOne.length() <= 5 && "1".equals(getTvSelectModel)) {
             newPasswordOne = newPasswordOne + num;
             TextView tv = findViewById(R.id.tv_password_new_one);
             tv.setText(newPasswordOne);
-        } else if (newPasswordOne.length() == 6 && newPasswordTwo.length() <= 5) {
+        }
+        if (newPasswordTwo.length() <= 5 && "2".equals(getTvSelectModel)) {
             newPasswordTwo = newPasswordTwo + num;
             TextView tv = findViewById(R.id.tv_password_new_two);
             tv.setText(newPasswordTwo);
