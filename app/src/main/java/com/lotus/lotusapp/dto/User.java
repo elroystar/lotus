@@ -14,17 +14,17 @@ public class User implements Parcelable {
 
     private String phone;
 
-    private Integer washing_num;
+    private Integer washingNum;
 
-    private Integer washing_total;
+    private Integer washingTotal;
 
-    private Integer reward_num;
+    private Integer rewardNum;
 
-    private Integer reward_total;
+    private Integer rewardTotal;
 
-    private Date create_time;
+    private Date createTime;
 
-    private Date update_time;
+    private Date updateTime;
 
     public User() {
 
@@ -38,24 +38,24 @@ public class User implements Parcelable {
         }
         phone = in.readString();
         if (in.readByte() == 0) {
-            washing_num = null;
+            washingNum = null;
         } else {
-            washing_num = in.readInt();
+            washingNum = in.readInt();
         }
         if (in.readByte() == 0) {
-            washing_total = null;
+            washingTotal = null;
         } else {
-            washing_total = in.readInt();
+            washingTotal = in.readInt();
         }
         if (in.readByte() == 0) {
-            reward_num = null;
+            rewardNum = null;
         } else {
-            reward_num = in.readInt();
+            rewardNum = in.readInt();
         }
         if (in.readByte() == 0) {
-            reward_total = null;
+            rewardTotal = null;
         } else {
-            reward_total = in.readInt();
+            rewardTotal = in.readInt();
         }
     }
 
@@ -87,52 +87,52 @@ public class User implements Parcelable {
         this.phone = phone;
     }
 
-    public Integer getWashing_num() {
-        return washing_num;
+    public Integer getWashingNum() {
+        return washingNum;
     }
 
-    public void setWashing_num(Integer washing_num) {
-        this.washing_num = washing_num;
+    public void setWashingNum(Integer washingNum) {
+        this.washingNum = washingNum;
     }
 
-    public Integer getWashing_total() {
-        return washing_total;
+    public Integer getWashingTotal() {
+        return washingTotal;
     }
 
-    public void setWashing_total(Integer washing_total) {
-        this.washing_total = washing_total;
+    public void setWashingTotal(Integer washingTotal) {
+        this.washingTotal = washingTotal;
     }
 
-    public Integer getReward_num() {
-        return reward_num;
+    public Integer getRewardNum() {
+        return rewardNum;
     }
 
-    public void setReward_num(Integer reward_num) {
-        this.reward_num = reward_num;
+    public void setRewardNum(Integer rewardNum) {
+        this.rewardNum = rewardNum;
     }
 
-    public Integer getReward_total() {
-        return reward_total;
+    public Integer getRewardTotal() {
+        return rewardTotal;
     }
 
-    public void setReward_total(Integer reward_total) {
-        this.reward_total = reward_total;
+    public void setRewardTotal(Integer rewardTotal) {
+        this.rewardTotal = rewardTotal;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public Date getUpdate_time() {
-        return update_time;
+    public Date getUpdateTime() {
+        return updateTime;
     }
 
-    public void setUpdate_time(Date update_time) {
-        this.update_time = update_time;
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     @Override
@@ -149,29 +149,29 @@ public class User implements Parcelable {
             dest.writeInt(id);
         }
         dest.writeString(phone);
-        if (washing_num == null) {
+        if (washingNum == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeInt(washing_num);
+            dest.writeInt(washingNum);
         }
-        if (washing_total == null) {
+        if (washingTotal == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeInt(washing_total);
+            dest.writeInt(washingTotal);
         }
-        if (reward_num == null) {
+        if (rewardNum == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeInt(reward_num);
+            dest.writeInt(rewardNum);
         }
-        if (reward_total == null) {
+        if (rewardTotal == null) {
             dest.writeByte((byte) 0);
         } else {
             dest.writeByte((byte) 1);
-            dest.writeInt(reward_total);
+            dest.writeInt(rewardTotal);
         }
     }
 }

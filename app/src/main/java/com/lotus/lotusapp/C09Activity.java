@@ -3,6 +3,7 @@ package com.lotus.lotusapp;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -14,6 +15,10 @@ import android.widget.TextView;
 
 import com.lotus.lotusapp.db.SQLiteDbHelper;
 import com.lotus.lotusapp.dto.PasswordRule;
+import com.lotus.lotusapp.dto.WashingMachine;
+import com.lotus.lotusapp.utils.PasswordRuleUtil;
+
+import java.util.List;
 
 public class C09Activity extends Activity {
 
@@ -39,6 +44,9 @@ public class C09Activity extends Activity {
     // 定义一个整型用load(),来设置soundID
     private int music;
 
+    // 有效洗衣机集合
+    private List<WashingMachine> washingMachines = null;
+
     /**
      * textView选中判断条件
      * 1：新1修改密码
@@ -51,7 +59,7 @@ public class C09Activity extends Activity {
      * 8：
      * 9：
      * 10：
-      */
+     */
     private String getTvSelectModel = "";
 
     /**
@@ -60,12 +68,17 @@ public class C09Activity extends Activity {
     private String newPasswordOne = "";
     private String newPasswordTwo = "";
 
+    // 数字输入框字符串
+    private String stringTx = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_c09);
         // 加载声音
         initSound();
+        // 加载有效洗衣机
+        initEffectiveWash();
         // 获取显示密码规则
         showPasswordRule();
         // 置灰不可选择按钮
@@ -100,6 +113,7 @@ public class C09Activity extends Activity {
 
     /**
      * 置灰不可选择按钮
+     *
      * @param model
      */
     private void ashNoChoiceButton(String model) {
@@ -108,22 +122,22 @@ public class C09Activity extends Activity {
                 ashOutMoneyButton();
                 break;
             case PRICE:
-                ashPriceButton();
+                ashPriceButton(false);
                 break;
             case TEST:
                 ashTestButton();
                 break;
             case WASHING_MACHINE:
-                ashWashingMachineButton();
+                ashWashingMachineButton(null, false);
                 break;
             case COIN_BOX:
                 ashCoinBoxButton();
                 break;
             default:
                 ashOutMoneyButton();
-                ashPriceButton();
+                ashPriceButton(false);
                 ashTestButton();
-                ashWashingMachineButton();
+                ashWashingMachineButton(null, false);
                 ashCoinBoxButton();
                 break;
         }
@@ -142,12 +156,33 @@ public class C09Activity extends Activity {
 
     /**
      * 置灰洗衣机
+     *
+     * @param washingMachines
+     * @param buttonLight
      */
-    private void ashWashingMachineButton() {
-        for (int i = 1; i <= 16; i++) {
-            // 获取textView id
-            int bt_washing_machine = getResources().getIdentifier("bt_washing_machine_" + i, "id", getPackageName());
-            findViewById(bt_washing_machine).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+    private void ashWashingMachineButton(List<WashingMachine> washingMachines, Boolean buttonLight) {
+        if (!washingMachines.isEmpty()) {
+            // 置灰选择的
+            for (WashingMachine washingMachine : washingMachines) {
+                // 获取textView id
+                int bt_washing_machine = getResources().getIdentifier("bt_washing_machine_" + washingMachine.getNum(), "id", getPackageName());
+                if (buttonLight) {
+                    findViewById(bt_washing_machine).setBackgroundResource(R.drawable.c09_bt_model_shape);
+                } else {
+                    findViewById(bt_washing_machine).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+                }
+            }
+        } else {
+            // 置灰所有
+            for (int i = 1; i <= 16; i++) {
+                // 获取textView id
+                int bt_washing_machine = getResources().getIdentifier("bt_washing_machine_" + i, "id", getPackageName());
+                if (buttonLight) {
+                    findViewById(bt_washing_machine).setBackgroundResource(R.drawable.c09_bt_model_shape);
+                } else {
+                    findViewById(bt_washing_machine).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+                }
+            }
         }
     }
 
@@ -170,17 +205,31 @@ public class C09Activity extends Activity {
 
     /**
      * 置灰定价项目
+     *
+     * @param buttonLight
      */
-    private void ashPriceButton() {
-        findViewById(R.id.bt_drying).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_rinse).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_cowboy).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_sheets).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_standard).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_washing_liquid).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_softening).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_disinfection_ing).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_disinfection_before).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+    private void ashPriceButton(Boolean buttonLight) {
+        if (buttonLight) {
+            findViewById(R.id.bt_drying).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+            findViewById(R.id.bt_rinse).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+            findViewById(R.id.bt_cowboy).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+            findViewById(R.id.bt_sheets).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+            findViewById(R.id.bt_standard).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+            findViewById(R.id.bt_washing_liquid).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+            findViewById(R.id.bt_softening).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+            findViewById(R.id.bt_disinfection_ing).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+            findViewById(R.id.bt_disinfection_before).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+        } else {
+            findViewById(R.id.bt_drying).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+            findViewById(R.id.bt_rinse).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+            findViewById(R.id.bt_cowboy).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+            findViewById(R.id.bt_sheets).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+            findViewById(R.id.bt_standard).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+            findViewById(R.id.bt_washing_liquid).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+            findViewById(R.id.bt_softening).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+            findViewById(R.id.bt_disinfection_ing).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+            findViewById(R.id.bt_disinfection_before).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        }
     }
 
     /**
@@ -244,7 +293,7 @@ public class C09Activity extends Activity {
                 return false;
             }
         });
-        // 刷干按钮
+        // 甩干按钮
 
 
     }
@@ -278,7 +327,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            insertPassword("1");
                             break;
                         case TEST:
 
@@ -302,7 +351,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            insertPassword("2");
                             break;
                         case TEST:
 
@@ -326,7 +375,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            insertPassword("3");
                             break;
                         case TEST:
 
@@ -350,7 +399,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            insertPassword("4");
                             break;
                         case TEST:
 
@@ -374,7 +423,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            insertPassword("5");
                             break;
                         case TEST:
 
@@ -398,7 +447,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            insertPassword("6");
                             break;
                         case TEST:
 
@@ -422,7 +471,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            insertPassword("7");
                             break;
                         case TEST:
 
@@ -446,7 +495,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            insertPassword("8");
                             break;
                         case TEST:
 
@@ -470,7 +519,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            insertPassword("9");
                             break;
                         case TEST:
 
@@ -494,7 +543,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            insertPassword("0");
                             break;
                         case TEST:
 
@@ -530,7 +579,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            modelButtonLight(PRICE);
                             break;
                         case TEST:
 
@@ -554,7 +603,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-
+                            clearPassword();
                             break;
                         case TEST:
 
@@ -565,6 +614,141 @@ public class C09Activity extends Activity {
                 return false;
             }
         });
+    }
+
+    /**
+     * 验证密码点亮模块按钮
+     *
+     * @param model
+     */
+    private void modelButtonLight(String model) {
+        sqLiteDbHelper = new SQLiteDbHelper(getApplicationContext());
+        SQLiteDatabase dbRead = sqLiteDbHelper.getReadableDatabase();
+        SQLiteDatabase dbWrit = sqLiteDbHelper.getWritableDatabase();
+        try {
+            // 验证密码有限期
+            // select * from password_bank where password = 'stringTx'
+            Cursor cursor = dbRead.query("password_bank",
+                    null,
+                    "password = ?",
+                    new String[]{stringTx},
+                    null,
+                    null,
+                    null);
+            if (cursor.getCount() > 0) {
+                alertMsg("Tips", "请验证后重新输入！");
+            } else {
+                // 获取密码规则
+                // select * from password_rule where state = '1'
+                cursor = dbRead.query("password_rule",
+                        null,
+                        "state = ?",
+                        new String[]{"1"},
+                        null,
+                        null,
+                        null);
+                if (cursor.getCount() > 0) {
+                    // passwordRule赋值
+                    while (cursor.moveToNext()) {
+                        passwordRule.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                        passwordRule.setRule(cursor.getString(cursor.getColumnIndex("rule")));
+                        passwordRule.setState(cursor.getString(cursor.getColumnIndex("state")));
+                    }
+                    // 匹配密码规则进入C界面
+                    if (PasswordRuleUtil.checkPassword(passwordRule.getRule(), stringTx)) {
+                        // 已经使用的密码入库
+                        dbWrit.execSQL("insert into password_bank(password) values ('" + stringTx + "')");
+                        switch (model) {
+                            case OUT_MONEY:
+
+                                break;
+                            case PRICE:
+                                // 定价区按钮亮起
+                                ashPriceButton(true);
+                                // 点亮有效洗衣机
+                                ashWashingMachineButton(washingMachines, true);
+                                break;
+                            case TEST:
+
+                                break;
+                        }
+                    } else {
+                        alertMsg("Tips", "请验证后重新输入！");
+                    }
+                } else {
+                    alertMsg("Error", "查询不到密码规则！");
+                }
+            }
+        } finally {
+            // 关闭数据库连接
+            dbRead.close();
+            dbWrit.close();
+        }
+    }
+
+    /**
+     * 加载有效洗衣机
+     */
+    private void initEffectiveWash() {
+        // 查询有效洗衣机
+        sqLiteDbHelper = new SQLiteDbHelper(getApplicationContext());
+        SQLiteDatabase dbRead = sqLiteDbHelper.getReadableDatabase();
+        try {
+            // select * from washer where state = '1'
+            Cursor cursor = dbRead.query("washing_machine",
+                    null,
+                    "state = ?",
+                    new String[]{"1"},
+                    null,
+                    null,
+                    null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    WashingMachine washingMachine = new WashingMachine();
+                    washingMachine.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                    washingMachine.setNum(cursor.getInt(cursor.getColumnIndex("num")));
+                    washingMachine.setCowboyPrice(cursor.getString(cursor.getColumnIndex("cowboy_price")));
+                    washingMachine.setDisinfectionBeforePrice(cursor.getString(cursor.getColumnIndex("disinfection_before_price")));
+                    washingMachine.setDisinfectionIngPrice(cursor.getString(cursor.getColumnIndex("disinfection_ing_price")));
+                    washingMachine.setDryingPrice(cursor.getString(cursor.getColumnIndex("drying_price")));
+                    washingMachine.setRinsePrice(cursor.getString(cursor.getColumnIndex("rinse_price")));
+                    washingMachine.setSheetsPrice(cursor.getString(cursor.getColumnIndex("sheets_price")));
+                    washingMachine.setSofteningPrice(cursor.getString(cursor.getColumnIndex("softening_price")));
+                    washingMachine.setStandardPrice(cursor.getString(cursor.getColumnIndex("standard_price")));
+                    washingMachine.setWashingLiquidPrice(cursor.getString(cursor.getColumnIndex("washing_liquid_price")));
+                    washingMachine.setDisinfectionState(cursor.getString(cursor.getColumnIndex("disinfection_state")));
+                    washingMachine.setRinseState(cursor.getString(cursor.getColumnIndex("rinse_state")));
+                    washingMachine.setWashingLiquidState(cursor.getString(cursor.getColumnIndex("washing_liquid_state")));
+                    washingMachine.setState(cursor.getString(cursor.getColumnIndex("state")));
+                    washingMachines.add(washingMachine);
+                }
+            } else {
+                alertMsg("Error", "没有找到可以用的洗衣机！");
+            }
+        } finally {
+            // 关闭数据库连接
+            dbRead.close();
+        }
+    }
+
+    /**
+     * 清空密码输入框
+     */
+    private void clearPassword() {
+        stringTx = "";
+        TextView tv = findViewById(R.id.tv_password);
+        tv.setText(stringTx);
+    }
+
+    /**
+     * 密码输入
+     *
+     * @param num
+     */
+    private void insertPassword(String num) {
+        stringTx = stringTx + num;
+        TextView tv = findViewById(R.id.tv_password);
+        tv.setText(stringTx);
     }
 
     /**

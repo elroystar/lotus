@@ -193,16 +193,16 @@ public class MainActivity extends Activity {
                             while (cursor.moveToNext()) {
                                 user.setId(cursor.getInt(cursor.getColumnIndex("id")));
                                 user.setPhone(cursor.getString(cursor.getColumnIndex("phone")));
-                                user.setReward_num(cursor.getInt(cursor.getColumnIndex("reward_num")));
-                                user.setReward_total(cursor.getInt(cursor.getColumnIndex("reward_total")));
-                                user.setWashing_num(cursor.getInt(cursor.getColumnIndex("washing_num")));
-                                user.setWashing_total(cursor.getInt(cursor.getColumnIndex("washing_total")));
+                                user.setRewardNum(cursor.getInt(cursor.getColumnIndex("reward_num")));
+                                user.setRewardTotal(cursor.getInt(cursor.getColumnIndex("reward_total")));
+                                user.setWashingNum(cursor.getInt(cursor.getColumnIndex("washing_num")));
+                                user.setWashingTotal(cursor.getInt(cursor.getColumnIndex("washing_total")));
                             }
                             // 显示洗衣次数及奖励
                             TextView tv = findViewById(R.id.tx_washing);
-                            tv.setText(user.getWashing_num());
+                            tv.setText(user.getWashingNum());
                             tv = findViewById(R.id.tx_reward);
-                            tv.setText(user.getReward_num());
+                            tv.setText(user.getRewardNum());
                         } else {
                             // 注册键亮起
                             imageButton = findViewById(R.id.ib_reg);
