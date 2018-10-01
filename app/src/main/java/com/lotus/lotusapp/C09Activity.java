@@ -18,6 +18,7 @@ import com.lotus.lotusapp.dto.PasswordRule;
 import com.lotus.lotusapp.dto.WashingMachine;
 import com.lotus.lotusapp.utils.PasswordRuleUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class C09Activity extends Activity {
@@ -31,6 +32,8 @@ public class C09Activity extends Activity {
 
     // C界面模式选择，默认为修改密码模式
     private String model = "";
+    // 定价区选择模式
+    private String modelPrice = "";
 
     // 密码规则
     private PasswordRule passwordRule;
@@ -45,7 +48,9 @@ public class C09Activity extends Activity {
     private int music;
 
     // 有效洗衣机集合
-    private List<WashingMachine> washingMachines = null;
+    private List<WashingMachine> washingMachines = new ArrayList<>();
+    // 选中洗衣机集合
+    private List<WashingMachine> washingMachinesSelect = new ArrayList<>();
 
     /**
      * textView选中判断条件
@@ -150,7 +155,7 @@ public class C09Activity extends Activity {
         for (int i = 1; i <= 4; i++) {
             // 获取textView id
             int bt_coin_box = getResources().getIdentifier("bt_coin_box_" + i, "id", getPackageName());
-            findViewById(bt_coin_box).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+            ashButton(bt_coin_box, R.drawable.c09_bt_ash_shape, false);
         }
     }
 
@@ -161,26 +166,26 @@ public class C09Activity extends Activity {
      * @param buttonLight
      */
     private void ashWashingMachineButton(List<WashingMachine> washingMachines, Boolean buttonLight) {
-        if (!washingMachines.isEmpty()) {
-            // 置灰选择的
-            for (WashingMachine washingMachine : washingMachines) {
-                // 获取textView id
-                int bt_washing_machine = getResources().getIdentifier("bt_washing_machine_" + washingMachine.getNum(), "id", getPackageName());
-                if (buttonLight) {
-                    findViewById(bt_washing_machine).setBackgroundResource(R.drawable.c09_bt_model_shape);
-                } else {
-                    findViewById(bt_washing_machine).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-                }
-            }
-        } else {
+        if (washingMachines == null) {
             // 置灰所有
             for (int i = 1; i <= 16; i++) {
                 // 获取textView id
                 int bt_washing_machine = getResources().getIdentifier("bt_washing_machine_" + i, "id", getPackageName());
                 if (buttonLight) {
-                    findViewById(bt_washing_machine).setBackgroundResource(R.drawable.c09_bt_model_shape);
+                    ashButton(bt_washing_machine, R.drawable.c09_bt_model_shape, true);
                 } else {
-                    findViewById(bt_washing_machine).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+                    ashButton(bt_washing_machine, R.drawable.c09_bt_ash_shape, false);
+                }
+            }
+        } else {
+            // 置灰选择的
+            for (WashingMachine washingMachine : washingMachines) {
+                // 获取textView id
+                int bt_washing_machine = getResources().getIdentifier("bt_washing_machine_" + washingMachine.getNum(), "id", getPackageName());
+                if (buttonLight) {
+                    ashButton(bt_washing_machine, R.drawable.c09_bt_model_shape, true);
+                } else {
+                    ashButton(bt_washing_machine, R.drawable.c09_bt_ash_shape, false);
                 }
             }
         }
@@ -190,17 +195,17 @@ public class C09Activity extends Activity {
      * 置灰测试项目
      */
     private void ashTestButton() {
-        findViewById(R.id.bt_test_disinfection).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_test_disinfection_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_test_washing_liquid).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_test_washing_liquid_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_test_softening).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_test_softening_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_test_inlet).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_test_inlet_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_test_drain).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_test_drain_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_test_short_program).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        ashButton(R.id.bt_test_disinfection, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_test_disinfection_switch, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_test_washing_liquid, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_test_washing_liquid_switch, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_test_softening, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_test_softening_switch, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_test_inlet, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_test_inlet_switch, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_test_drain, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_test_drain_switch, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_test_short_program, R.drawable.c09_bt_ash_shape, false);
     }
 
     /**
@@ -210,25 +215,25 @@ public class C09Activity extends Activity {
      */
     private void ashPriceButton(Boolean buttonLight) {
         if (buttonLight) {
-            findViewById(R.id.bt_drying).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
-            findViewById(R.id.bt_rinse).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
-            findViewById(R.id.bt_cowboy).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
-            findViewById(R.id.bt_sheets).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
-            findViewById(R.id.bt_standard).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
-            findViewById(R.id.bt_washing_liquid).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
-            findViewById(R.id.bt_softening).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
-            findViewById(R.id.bt_disinfection_ing).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
-            findViewById(R.id.bt_disinfection_before).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+            ashButton(R.id.bt_drying, R.drawable.c09_bt_accessories_shape, true);
+            ashButton(R.id.bt_rinse, R.drawable.c09_bt_accessories_shape, true);
+            ashButton(R.id.bt_cowboy, R.drawable.c09_bt_accessories_shape, true);
+            ashButton(R.id.bt_sheets, R.drawable.c09_bt_accessories_shape, true);
+            ashButton(R.id.bt_standard, R.drawable.c09_bt_accessories_shape, true);
+            ashButton(R.id.bt_washing_liquid, R.drawable.c09_bt_accessories_shape, true);
+            ashButton(R.id.bt_softening, R.drawable.c09_bt_accessories_shape, true);
+            ashButton(R.id.bt_disinfection_ing, R.drawable.c09_bt_accessories_shape, true);
+            ashButton(R.id.bt_disinfection_before, R.drawable.c09_bt_accessories_shape, true);
         } else {
-            findViewById(R.id.bt_drying).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-            findViewById(R.id.bt_rinse).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-            findViewById(R.id.bt_cowboy).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-            findViewById(R.id.bt_sheets).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-            findViewById(R.id.bt_standard).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-            findViewById(R.id.bt_washing_liquid).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-            findViewById(R.id.bt_softening).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-            findViewById(R.id.bt_disinfection_ing).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-            findViewById(R.id.bt_disinfection_before).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+            ashButton(R.id.bt_drying, R.drawable.c09_bt_ash_shape, false);
+            ashButton(R.id.bt_rinse, R.drawable.c09_bt_ash_shape, false);
+            ashButton(R.id.bt_cowboy, R.drawable.c09_bt_ash_shape, false);
+            ashButton(R.id.bt_sheets, R.drawable.c09_bt_ash_shape, false);
+            ashButton(R.id.bt_standard, R.drawable.c09_bt_ash_shape, false);
+            ashButton(R.id.bt_washing_liquid, R.drawable.c09_bt_ash_shape, false);
+            ashButton(R.id.bt_softening, R.drawable.c09_bt_ash_shape, false);
+            ashButton(R.id.bt_disinfection_ing, R.drawable.c09_bt_ash_shape, false);
+            ashButton(R.id.bt_disinfection_before, R.drawable.c09_bt_ash_shape, false);
         }
     }
 
@@ -236,8 +241,8 @@ public class C09Activity extends Activity {
      * 置灰出币开关
      */
     private void ashOutMoneyButton() {
-        findViewById(R.id.bt_on_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
-        findViewById(R.id.bt_un_switch).setBackgroundResource(R.drawable.c09_bt_ash_shape);
+        ashButton(R.id.bt_on_switch, R.drawable.c09_bt_ash_shape, false);
+        ashButton(R.id.bt_un_switch, R.drawable.c09_bt_ash_shape, false);
     }
 
     /**
@@ -288,14 +293,43 @@ public class C09Activity extends Activity {
                     // 修改模式
                     model = PRICE;
                     // 定价按钮常亮
-                    v.setBackgroundColor(Color.parseColor("#ADFF2F"));
+                    v.setBackgroundResource(R.drawable.c09_bt_accessories_select_shape);
                 }
                 return false;
             }
         });
         // 甩干按钮
+        findViewById(R.id.bt_drying).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // 播放按键声音
+                    playSound();
+                    if (!washingMachinesSelect.isEmpty()) {
+                        // 甩干按钮选择状态
+                        v.setBackgroundResource(R.drawable.c09_bt_accessories_select_shape);
+                        modelPrice = "price_drying";
+                    } else {
+                        alertMsg("Tips", "请先选择洗衣机！");
+                    }
+                }
+                return false;
+            }
+        });
 
 
+    }
+
+    /**
+     * 按钮置灰加不可点击
+     *
+     * @param bt_coin_box
+     * @param drawable
+     * @param enable
+     */
+    private void ashButton(int bt_coin_box, int drawable, boolean enable) {
+        findViewById(bt_coin_box).setBackgroundResource(drawable);
+        findViewById(bt_coin_box).setEnabled(enable);
     }
 
     /**

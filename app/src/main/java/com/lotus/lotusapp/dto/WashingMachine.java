@@ -3,6 +3,8 @@ package com.lotus.lotusapp.dto;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 /**
  * 洗衣机dto
  */
@@ -37,6 +39,64 @@ public class WashingMachine implements Parcelable {
     private String disinfectionState;
 
     private String rinseState;
+
+    private Date createTime;
+
+    private Date updateTime;
+
+    protected WashingMachine(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            num = null;
+        } else {
+            num = in.readInt();
+        }
+        state = in.readString();
+        dryingPrice = in.readString();
+        rinsePrice = in.readString();
+        cowboyPrice = in.readString();
+        sheetsPrice = in.readString();
+        standardPrice = in.readString();
+        washingLiquidPrice = in.readString();
+        softeningPrice = in.readString();
+        disinfectionIngPrice = in.readString();
+        disinfectionBeforePrice = in.readString();
+        washingLiquidState = in.readString();
+        disinfectionState = in.readString();
+        rinseState = in.readString();
+    }
+
+    public static final Creator<WashingMachine> CREATOR = new Creator<WashingMachine>() {
+        @Override
+        public WashingMachine createFromParcel(Parcel in) {
+            return new WashingMachine(in);
+        }
+
+        @Override
+        public WashingMachine[] newArray(int size) {
+            return new WashingMachine[size];
+        }
+    };
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 
     public Integer getId() {
         return id;
@@ -160,44 +220,6 @@ public class WashingMachine implements Parcelable {
 
     public WashingMachine() {
     }
-
-    public WashingMachine(Parcel in) {
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readInt();
-        }
-        if (in.readByte() == 0) {
-            num = null;
-        } else {
-            num = in.readInt();
-        }
-        state = in.readString();
-        dryingPrice = in.readString();
-        rinsePrice = in.readString();
-        cowboyPrice = in.readString();
-        sheetsPrice = in.readString();
-        standardPrice = in.readString();
-        washingLiquidPrice = in.readString();
-        softeningPrice = in.readString();
-        disinfectionIngPrice = in.readString();
-        disinfectionBeforePrice = in.readString();
-        washingLiquidState = in.readString();
-        disinfectionState = in.readString();
-        rinseState = in.readString();
-    }
-
-    public static final Creator<WashingMachine> CREATOR = new Creator<WashingMachine>() {
-        @Override
-        public WashingMachine createFromParcel(Parcel in) {
-            return new WashingMachine(in);
-        }
-
-        @Override
-        public WashingMachine[] newArray(int size) {
-            return new WashingMachine[size];
-        }
-    };
 
     @Override
     public int describeContents() {

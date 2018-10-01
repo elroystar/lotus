@@ -55,6 +55,8 @@ public class MainActivity extends Activity {
     // 密码规则实体类定义
     private PasswordRule passwordRule = new PasswordRule();
 
+    private String filePath = Environment.getExternalStorageDirectory().getPath() + File.separator + "data" + File.separator + "lotus" + File.separator + "a09";
+
     // 定义RequestOptions
     private RequestOptions requestOptions = new RequestOptions()
             .error(R.drawable.ic_launcher_background);
@@ -280,7 +282,7 @@ public class MainActivity extends Activity {
             // 播放按键声音
             playSound();
             // 重新设置按下时的背景图片
-            loadImage(ib_num, this, "cg", "ib_num_OK.png");
+            loadImage(ib_num, this, filePath + File.separator + "cg", "ib_num_OK.png");
             if (stringTx.length() < 10) {
                 // 获取textView id
                 int tx_num_id = getResources().getIdentifier("tx_num_" + stringTx.length(), "id", getPackageName());
@@ -290,7 +292,7 @@ public class MainActivity extends Activity {
             stringTx = stringTx + txStr;
         } else if (event.getAction() == MotionEvent.ACTION_UP) {
             // 再修改为抬起时的正常图片
-            loadImage(ib_num, this, "cg", imgStr);
+            loadImage(ib_num, this, filePath + File.separator + "cg", imgStr);
         }
         return false;
     }
@@ -348,25 +350,25 @@ public class MainActivity extends Activity {
             imageButton = findViewById(ib_id);
             //加载图片
             Glide.with(this)
-                    .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + "cg", "ib_num_" + i + ".png"))
+                    .load(new File(filePath + File.separator + "cg", "ib_num_" + i + ".png"))
                     .apply(requestOptions)
                     .into(imageButton);
         }
-        loadImage(R.id.ib_num_en, this, "cg", "ib_num_En.png");
-        loadImage(R.id.ib_num_esc, this, "cg", "ib_num_Esc.png");
-        loadImage(R.id.ib_num_ok, this, "cg", "ib_num_OK.png");
+        loadImage(R.id.ib_num_en, this, filePath + File.separator + "cg", "ib_num_En.png");
+        loadImage(R.id.ib_num_esc, this, filePath + File.separator + "cg", "ib_num_Esc.png");
+        loadImage(R.id.ib_num_ok, this, filePath + File.separator + "cg", "ib_num_OK.png");
     }
 
     /**
      * 加载洗衣机键
      */
     private void loadWashingBtn() {
-        loadImage(R.id.ib_washing_1, this, "wash", "ib_wash_normal1.png");
-        loadImage(R.id.ib_washing_2, this, "wash", "ib_wash_damaged.png");
-        loadImage(R.id.ib_washing_3, this, "wash", "ib_wash_invalid.png");
-        loadImage(R.id.ib_washing_4, this, "wash", "ib_wash_ing1.png");
-        loadImage(R.id.ib_washing_5, this, "wash", "ib_wash_ing2.png");
-        loadImage(R.id.ib_washing_6, this, "wash", "ib_wash_ing3.png");
+        loadImage(R.id.ib_washing_1, this, filePath + File.separator + "wash", "ib_wash_normal1.png");
+        loadImage(R.id.ib_washing_2, this, filePath + File.separator + "wash", "ib_wash_damaged.png");
+        loadImage(R.id.ib_washing_3, this, filePath + File.separator + "wash", "ib_wash_invalid.png");
+        loadImage(R.id.ib_washing_4, this, filePath + File.separator + "wash", "ib_wash_ing1.png");
+        loadImage(R.id.ib_washing_5, this, filePath + File.separator + "wash", "ib_wash_ing2.png");
+        loadImage(R.id.ib_washing_6, this, filePath + File.separator + "wash", "ib_wash_ing3.png");
     }
 
     /**
@@ -374,13 +376,13 @@ public class MainActivity extends Activity {
      *
      * @param ib_washing
      * @param activity
-     * @param wash
+     * @param filePath
      * @param imgStr
      */
-    private void loadImage(int ib_washing, Activity activity, String wash, String imgStr) {
+    private void loadImage(int ib_washing, Activity activity, String filePath, String imgStr) {
         imageButton = findViewById(ib_washing);
         Glide.with(activity)
-                .load(new File(Environment.getDataDirectory().getPath() + File.separator + "lotus" + File.separator + "a09" + File.separator + wash, imgStr))
+                .load(new File(filePath, imgStr))
                 .apply(requestOptions)
                 .into(imageButton);
     }
