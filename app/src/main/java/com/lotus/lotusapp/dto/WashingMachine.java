@@ -16,23 +16,41 @@ public class WashingMachine implements Parcelable {
 
     private String state;
 
-    private String dryingPrice;
+    private String dryingPriceCoin;
 
-    private String rinsePrice;
+    private String dryingPriceMobile;
 
-    private String cowboyPrice;
+    private String rinsePriceCoin;
 
-    private String sheetsPrice;
+    private String rinsePriceMobile;
 
-    private String standardPrice;
+    private String cowboyPriceCoin;
 
-    private String washingLiquidPrice;
+    private String cowboyPriceMobile;
 
-    private String softeningPrice;
+    private String sheetsPriceCoin;
 
-    private String disinfectionIngPrice;
+    private String sheetsPriceMobile;
 
-    private String disinfectionBeforePrice;
+    private String standardPriceCoin;
+
+    private String standardPriceMobile;
+
+    private String washingLiquidPriceCoin;
+
+    private String washingLiquidPriceMobile;
+
+    private String softeningPriceCoin;
+
+    private String softeningPriceMobile;
+
+    private String disinfectionIngPriceCoin;
+
+    private String disinfectionIngPriceMobile;
+
+    private String disinfectionBeforePriceCoin;
+
+    private String disinfectionBeforePriceMobile;
 
     private String washingLiquidState;
 
@@ -43,6 +61,9 @@ public class WashingMachine implements Parcelable {
     private Date createTime;
 
     private Date updateTime;
+
+    public WashingMachine() {
+    }
 
     protected WashingMachine(Parcel in) {
         if (in.readByte() == 0) {
@@ -56,15 +77,24 @@ public class WashingMachine implements Parcelable {
             num = in.readInt();
         }
         state = in.readString();
-        dryingPrice = in.readString();
-        rinsePrice = in.readString();
-        cowboyPrice = in.readString();
-        sheetsPrice = in.readString();
-        standardPrice = in.readString();
-        washingLiquidPrice = in.readString();
-        softeningPrice = in.readString();
-        disinfectionIngPrice = in.readString();
-        disinfectionBeforePrice = in.readString();
+        dryingPriceCoin = in.readString();
+        dryingPriceMobile = in.readString();
+        rinsePriceCoin = in.readString();
+        rinsePriceMobile = in.readString();
+        cowboyPriceCoin = in.readString();
+        cowboyPriceMobile = in.readString();
+        sheetsPriceCoin = in.readString();
+        sheetsPriceMobile = in.readString();
+        standardPriceCoin = in.readString();
+        standardPriceMobile = in.readString();
+        washingLiquidPriceCoin = in.readString();
+        washingLiquidPriceMobile = in.readString();
+        softeningPriceCoin = in.readString();
+        softeningPriceMobile = in.readString();
+        disinfectionIngPriceCoin = in.readString();
+        disinfectionIngPriceMobile = in.readString();
+        disinfectionBeforePriceCoin = in.readString();
+        disinfectionBeforePriceMobile = in.readString();
         washingLiquidState = in.readString();
         disinfectionState = in.readString();
         rinseState = in.readString();
@@ -81,22 +111,6 @@ public class WashingMachine implements Parcelable {
             return new WashingMachine[size];
         }
     };
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
 
     public Integer getId() {
         return id;
@@ -122,76 +136,148 @@ public class WashingMachine implements Parcelable {
         this.state = state;
     }
 
-    public String getDryingPrice() {
-        return dryingPrice;
+    public String getDryingPriceCoin() {
+        return dryingPriceCoin;
     }
 
-    public void setDryingPrice(String dryingPrice) {
-        this.dryingPrice = dryingPrice;
+    public void setDryingPriceCoin(String dryingPriceCoin) {
+        this.dryingPriceCoin = dryingPriceCoin;
     }
 
-    public String getRinsePrice() {
-        return rinsePrice;
+    public String getDryingPriceMobile() {
+        return dryingPriceMobile;
     }
 
-    public void setRinsePrice(String rinsePrice) {
-        this.rinsePrice = rinsePrice;
+    public void setDryingPriceMobile(String dryingPriceMobile) {
+        this.dryingPriceMobile = dryingPriceMobile;
     }
 
-    public String getCowboyPrice() {
-        return cowboyPrice;
+    public String getRinsePriceCoin() {
+        return rinsePriceCoin;
     }
 
-    public void setCowboyPrice(String cowboyPrice) {
-        this.cowboyPrice = cowboyPrice;
+    public void setRinsePriceCoin(String rinsePriceCoin) {
+        this.rinsePriceCoin = rinsePriceCoin;
     }
 
-    public String getSheetsPrice() {
-        return sheetsPrice;
+    public String getRinsePriceMobile() {
+        return rinsePriceMobile;
     }
 
-    public void setSheetsPrice(String sheetsPrice) {
-        this.sheetsPrice = sheetsPrice;
+    public void setRinsePriceMobile(String rinsePriceMobile) {
+        this.rinsePriceMobile = rinsePriceMobile;
     }
 
-    public String getStandardPrice() {
-        return standardPrice;
+    public String getCowboyPriceCoin() {
+        return cowboyPriceCoin;
     }
 
-    public void setStandardPrice(String standardPrice) {
-        this.standardPrice = standardPrice;
+    public void setCowboyPriceCoin(String cowboyPriceCoin) {
+        this.cowboyPriceCoin = cowboyPriceCoin;
     }
 
-    public String getWashingLiquidPrice() {
-        return washingLiquidPrice;
+    public String getCowboyPriceMobile() {
+        return cowboyPriceMobile;
     }
 
-    public void setWashingLiquidPrice(String washingLiquidPrice) {
-        this.washingLiquidPrice = washingLiquidPrice;
+    public void setCowboyPriceMobile(String cowboyPriceMobile) {
+        this.cowboyPriceMobile = cowboyPriceMobile;
     }
 
-    public String getSofteningPrice() {
-        return softeningPrice;
+    public String getSheetsPriceCoin() {
+        return sheetsPriceCoin;
     }
 
-    public void setSofteningPrice(String softeningPrice) {
-        this.softeningPrice = softeningPrice;
+    public void setSheetsPriceCoin(String sheetsPriceCoin) {
+        this.sheetsPriceCoin = sheetsPriceCoin;
     }
 
-    public String getDisinfectionIngPrice() {
-        return disinfectionIngPrice;
+    public String getSheetsPriceMobile() {
+        return sheetsPriceMobile;
     }
 
-    public void setDisinfectionIngPrice(String disinfectionIngPrice) {
-        this.disinfectionIngPrice = disinfectionIngPrice;
+    public void setSheetsPriceMobile(String sheetsPriceMobile) {
+        this.sheetsPriceMobile = sheetsPriceMobile;
     }
 
-    public String getDisinfectionBeforePrice() {
-        return disinfectionBeforePrice;
+    public String getStandardPriceCoin() {
+        return standardPriceCoin;
     }
 
-    public void setDisinfectionBeforePrice(String disinfectionBeforePrice) {
-        this.disinfectionBeforePrice = disinfectionBeforePrice;
+    public void setStandardPriceCoin(String standardPriceCoin) {
+        this.standardPriceCoin = standardPriceCoin;
+    }
+
+    public String getStandardPriceMobile() {
+        return standardPriceMobile;
+    }
+
+    public void setStandardPriceMobile(String standardPriceMobile) {
+        this.standardPriceMobile = standardPriceMobile;
+    }
+
+    public String getWashingLiquidPriceCoin() {
+        return washingLiquidPriceCoin;
+    }
+
+    public void setWashingLiquidPriceCoin(String washingLiquidPriceCoin) {
+        this.washingLiquidPriceCoin = washingLiquidPriceCoin;
+    }
+
+    public String getWashingLiquidPriceMobile() {
+        return washingLiquidPriceMobile;
+    }
+
+    public void setWashingLiquidPriceMobile(String washingLiquidPriceMobile) {
+        this.washingLiquidPriceMobile = washingLiquidPriceMobile;
+    }
+
+    public String getSofteningPriceCoin() {
+        return softeningPriceCoin;
+    }
+
+    public void setSofteningPriceCoin(String softeningPriceCoin) {
+        this.softeningPriceCoin = softeningPriceCoin;
+    }
+
+    public String getSofteningPriceMobile() {
+        return softeningPriceMobile;
+    }
+
+    public void setSofteningPriceMobile(String softeningPriceMobile) {
+        this.softeningPriceMobile = softeningPriceMobile;
+    }
+
+    public String getDisinfectionIngPriceCoin() {
+        return disinfectionIngPriceCoin;
+    }
+
+    public void setDisinfectionIngPriceCoin(String disinfectionIngPriceCoin) {
+        this.disinfectionIngPriceCoin = disinfectionIngPriceCoin;
+    }
+
+    public String getDisinfectionIngPriceMobile() {
+        return disinfectionIngPriceMobile;
+    }
+
+    public void setDisinfectionIngPriceMobile(String disinfectionIngPriceMobile) {
+        this.disinfectionIngPriceMobile = disinfectionIngPriceMobile;
+    }
+
+    public String getDisinfectionBeforePriceCoin() {
+        return disinfectionBeforePriceCoin;
+    }
+
+    public void setDisinfectionBeforePriceCoin(String disinfectionBeforePriceCoin) {
+        this.disinfectionBeforePriceCoin = disinfectionBeforePriceCoin;
+    }
+
+    public String getDisinfectionBeforePriceMobile() {
+        return disinfectionBeforePriceMobile;
+    }
+
+    public void setDisinfectionBeforePriceMobile(String disinfectionBeforePriceMobile) {
+        this.disinfectionBeforePriceMobile = disinfectionBeforePriceMobile;
     }
 
     public String getWashingLiquidState() {
@@ -218,7 +304,20 @@ public class WashingMachine implements Parcelable {
         this.rinseState = rinseState;
     }
 
-    public WashingMachine() {
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 
     @Override
@@ -241,15 +340,24 @@ public class WashingMachine implements Parcelable {
             dest.writeInt(num);
         }
         dest.writeString(state);
-        dest.writeString(dryingPrice);
-        dest.writeString(rinsePrice);
-        dest.writeString(cowboyPrice);
-        dest.writeString(sheetsPrice);
-        dest.writeString(standardPrice);
-        dest.writeString(washingLiquidPrice);
-        dest.writeString(softeningPrice);
-        dest.writeString(disinfectionIngPrice);
-        dest.writeString(disinfectionBeforePrice);
+        dest.writeString(dryingPriceCoin);
+        dest.writeString(dryingPriceMobile);
+        dest.writeString(rinsePriceCoin);
+        dest.writeString(rinsePriceMobile);
+        dest.writeString(cowboyPriceCoin);
+        dest.writeString(cowboyPriceMobile);
+        dest.writeString(sheetsPriceCoin);
+        dest.writeString(sheetsPriceMobile);
+        dest.writeString(standardPriceCoin);
+        dest.writeString(standardPriceMobile);
+        dest.writeString(washingLiquidPriceCoin);
+        dest.writeString(washingLiquidPriceMobile);
+        dest.writeString(softeningPriceCoin);
+        dest.writeString(softeningPriceMobile);
+        dest.writeString(disinfectionIngPriceCoin);
+        dest.writeString(disinfectionIngPriceMobile);
+        dest.writeString(disinfectionBeforePriceCoin);
+        dest.writeString(disinfectionBeforePriceMobile);
         dest.writeString(washingLiquidState);
         dest.writeString(disinfectionState);
         dest.writeString(rinseState);

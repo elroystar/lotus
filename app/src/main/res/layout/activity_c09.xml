@@ -198,7 +198,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_drying_price1"
+                    android:id="@+id/tv_drying_price_mobile"
                     android:layout_width="250px"
                     android:layout_height="67px"
                     android:layout_weight="1"
@@ -208,7 +208,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tv_drying_price2"
+                    android:id="@+id/tv_drying_price_coin"
                     android:layout_width="250px"
                     android:layout_height="67px"
                     android:layout_weight="1"
@@ -218,7 +218,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tv_rinse_price1"
+                    android:id="@+id/tv_rinse_price_mobile"
                     android:layout_width="250px"
                     android:layout_height="67px"
                     android:layout_weight="1"
@@ -228,7 +228,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tv_rinse_price2"
+                    android:id="@+id/tv_rinse_price_coin"
                     android:layout_width="250px"
                     android:layout_height="67px"
                     android:layout_weight="1"
@@ -238,7 +238,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tv_cowboy_price1"
+                    android:id="@+id/tv_cowboy_price_mobile"
                     android:layout_width="250px"
                     android:layout_height="67px"
                     android:layout_weight="1"
@@ -248,7 +248,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tv_cowboy_price2"
+                    android:id="@+id/tv_cowboy_price_coin"
                     android:layout_width="250px"
                     android:layout_height="67px"
                     android:layout_weight="1"
@@ -258,7 +258,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tv_sheets_price1"
+                    android:id="@+id/tv_sheets_price_mobile"
                     android:layout_width="250px"
                     android:layout_height="67px"
                     android:layout_weight="1"
@@ -268,7 +268,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tv_sheets_price2"
+                    android:id="@+id/tv_sheets_price_coin"
                     android:layout_width="250px"
                     android:layout_height="67px"
                     android:layout_weight="1"
@@ -278,7 +278,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tv_standard_price1"
+                    android:id="@+id/tv_standard_price_mobile"
                     android:layout_width="250px"
                     android:layout_height="67px"
                     android:layout_weight="1"
@@ -288,7 +288,7 @@
                     android:textSize="25sp" />
 
                 <TextView
-                    android:id="@+id/tv_standard_price2"
+                    android:id="@+id/tv_standard_price_coin"
                     android:layout_width="250px"
                     android:layout_height="67px"
                     android:layout_weight="1"
@@ -354,7 +354,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tv_washing_liquid_price1"
+                            android:id="@+id/tv_washing_liquid_price_mobile"
                             android:layout_width="250px"
                             android:layout_height="67px"
                             android:layout_weight="1"
@@ -364,7 +364,7 @@
                             android:textSize="25sp" />
 
                         <TextView
-                            android:id="@+id/tv_washing_liquid_price1"
+                            android:id="@+id/tv_washing_liquid_price_coin"
                             android:layout_width="250px"
                             android:layout_height="67px"
                             android:layout_weight="1"
@@ -374,7 +374,7 @@
                             android:textSize="25sp" />
 
                         <TextView
-                            android:id="@+id/tv_softening_price1"
+                            android:id="@+id/tv_softening_price_mobile"
                             android:layout_width="250px"
                             android:layout_height="67px"
                             android:layout_weight="1"
@@ -384,7 +384,7 @@
                             android:textSize="25sp" />
 
                         <TextView
-                            android:id="@+id/tv_softening_price2"
+                            android:id="@+id/tv_softening_price_coin"
                             android:layout_width="250px"
                             android:layout_height="67px"
                             android:layout_weight="1"
@@ -394,7 +394,7 @@
                             android:textSize="25sp" />
 
                         <TextView
-                            android:id="@+id/tv_disinfection_ing_price1"
+                            android:id="@+id/tv_disinfection_ing_price_mobile"
                             android:layout_width="250px"
                             android:layout_height="67px"
                             android:layout_weight="1"
@@ -404,7 +404,7 @@
                             android:textSize="25sp" />
 
                         <TextView
-                            android:id="@+id/tv_disinfection_ing_price2"
+                            android:id="@+id/tv_disinfection_ing_price_coin"
                             android:layout_width="250px"
                             android:layout_height="67px"
                             android:layout_weight="1"
@@ -414,7 +414,7 @@
                             android:textSize="25sp" />
 
                         <TextView
-                            android:id="@+id/tv_disinfection_before_price1"
+                            android:id="@+id/tv_disinfection_before_price_mobile"
                             android:layout_width="250px"
                             android:layout_height="67px"
                             android:layout_weight="1"
@@ -424,7 +424,7 @@
                             android:textSize="25sp" />
 
                         <TextView
-                            android:id="@+id/tv_disinfection_before_price2"
+                            android:id="@+id/tv_disinfection_before_price_coin"
                             android:layout_width="250px"
                             android:layout_height="67px"
                             android:layout_weight="1"

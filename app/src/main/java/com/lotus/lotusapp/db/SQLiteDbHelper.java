@@ -11,7 +11,7 @@ import com.lotus.lotusapp.utils.DateUtil;
  */
 public class SQLiteDbHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 3;
+    private static final int DB_VERSION = 4;
     private static final String DB_NAME = "lotusDB";
     private static final String TABLE_USER = "user";
     private static final String TABLE_PASSWORD_BANK = "password_bank";
@@ -49,15 +49,23 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             + "washing_liquid_state varchar(2) not null default '1',"
             + "rinse_state varchar(2) not null default '1',"
             + "disinfection_state varchar(2) not null default '1',"
-            + "cowboy_price varchar(10) not null default '0',"
-            + "disinfection_before_price varchar(10) not null default '0',"
-            + "disinfection_ing_price varchar(10) not null default '0',"
-            + "drying_price varchar(10) not null default '0',"
-            + "rinse_price varchar(10) not null default '0',"
-            + "sheets_price varchar(10) not null default '0',"
-            + "softening_price varchar(10) not null default '0',"
-            + "standard_price varchar(10) not null default '0',"
-            + "washing_liquid_price varchar(10) not null default '0',"
+            + "cowboy_price_coin varchar(10) not null default '0',"
+            + "cowboy_price_mobile varchar(10) not null default '0',"
+            + "disinfection_before_price_coin varchar(10) not null default '0',"
+            + "disinfection_before_price_mobile varchar(10) not null default '0',"
+            + "disinfection_ing_price_coin varchar(10) not null default '0',"
+            + "disinfection_ing_price_mobile varchar(10) not null default '0',"
+            + "drying_price_coin varchar(10) not null default '0',"
+            + "drying_price_mobile varchar(10) not null default '0',"
+            + "rinse_price_coin varchar(10) not null default '0',"
+            + "rinse_price_mobile varchar(10) not null default '0',"
+            + "sheets_price_coin varchar(10) not null default '0',"
+            + "sheets_price_mobile varchar(10) not null default '0',"
+            + "softening_price_coin varchar(10) not null default '0',"
+            + "softening_price_mobile varchar(10) not null default '0',"
+            + "standard_price_coin varchar(10) not null default '0',"
+            + "standard_price_mobile varchar(10) not null default '0',"
+            + "washing_liquid_price_coin varchar(10) not null default '0',"
             + "create_time timestamp default (datetime('now','localtime')),"
             + "update_time timestamp default (datetime('now','localtime'))"
             + ");";
@@ -89,6 +97,8 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // 删除 washing_machine 表
+        db.execSQL("drop table washing_machine");
         // 创建 washing_machine 表
         db.execSQL(WASHING_MACHINE_CREATE_TABLE_SQL);
         // washing_machine 表 添加测试数据
