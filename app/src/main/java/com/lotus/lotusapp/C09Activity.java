@@ -2,6 +2,7 @@ package com.lotus.lotusapp;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,6 +29,15 @@ public class C09Activity extends Activity {
     public static final String TEST = "test";
     public static final String WASHING_MACHINE = "washing_machine";
     public static final String COIN_BOX = "coin_box";
+    public static final String PRICE_DRYING = "price_drying";
+    public static final String PRICE_RINSE = "price_rinse";
+    public static final String PRICE_COWBOY = "price_cowboy";
+    public static final String PRICE_SHEETS = "price_sheets";
+    public static final String PRICE_STANDARD = "price_standard";
+    public static final String PRICE_WASHING_LIQUID = "price_washing_liquid";
+    public static final String PRICE_SOFTENING = "price_softening";
+    public static final String PRICE_DISINFECTION_ING = "price_disinfection_ing";
+    public static final String PRICE_DISINFECTION_BEFORE = "price_disinfection_before";
 
     // C界面模式选择，默认为修改密码模式
     private String model = "";
@@ -74,6 +84,25 @@ public class C09Activity extends Activity {
 
     // 数字输入框字符串
     private String stringTx = "";
+    // 价格区变量
+    private String dryingPriceMobile;
+    private String dryingPriceCoin;
+    private String rinsePriceMobile;
+    private String rinsePriceCoin;
+    private String sheetsPriceMobile;
+    private String sheetsPriceCoin;
+    private String cowboyPriceMobile;
+    private String cowboyPriceCoin;
+    private String standardPriceMobile;
+    private String standardPriceCoin;
+    private String washingLiquidPriceMobile;
+    private String washingLiquidPriceCoin;
+    private String softeningPriceMobile;
+    private String softeningPriceCoin;
+    private String disinfectionIngPriceMobile;
+    private String disinfectionIngPriceCoin;
+    private String disinfectionBeforePriceMobile;
+    private String disinfectionBeforePriceCoin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -301,22 +330,292 @@ public class C09Activity extends Activity {
         findViewById(R.id.bt_drying).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    // 播放按键声音
-                    playSound();
-                    if (!washingMachinesSelect.isEmpty()) {
-                        // 甩干按钮选择状态
-                        v.setBackgroundResource(R.drawable.c09_bt_accessories_select_shape);
-                        modelPrice = "price_drying";
-                    } else {
-                        alertMsg("Tips", "请先选择洗衣机！");
-                    }
-                }
-                return false;
+                return onTouchPrice(v, event, R.id.bt_drying, PRICE_DRYING);
             }
         });
+        // 甩干移动支付
+        findViewById(R.id.tv_drying_price_mobile).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_drying_price_mobile, "3");
+            }
+        });
+        // 甩干硬币支付
+        findViewById(R.id.tv_drying_price_coin).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_drying_price_coin, "4");
+            }
+        });
+        // 漂洗按钮
+        findViewById(R.id.bt_rinse).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPrice(v, event, R.id.bt_rinse, PRICE_RINSE);
+            }
+        });
+        // 漂洗移动支付
+        findViewById(R.id.tv_rinse_price_mobile).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_rinse_price_mobile, "5");
+            }
+        });
+        // 漂洗硬币支付
+        findViewById(R.id.tv_rinse_price_coin).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_rinse_price_coin, "6");
+            }
+        });
+        // 牛仔按钮
+        findViewById(R.id.bt_cowboy).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPrice(v, event, R.id.bt_cowboy, PRICE_COWBOY);
+            }
+        });
+        // 牛仔移动支付
+        findViewById(R.id.tv_cowboy_price_mobile).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_cowboy_price_mobile, "7");
+            }
+        });
+        // 牛仔硬币支付
+        findViewById(R.id.tv_cowboy_price_coin).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_cowboy_price_coin, "8");
+            }
+        });
+        // 被单按钮
+        findViewById(R.id.bt_sheets).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPrice(v, event, R.id.bt_sheets, PRICE_SHEETS);
+            }
+        });
+        // 被单移动支付
+        findViewById(R.id.tv_sheets_price_mobile).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_sheets_price_mobile, "9");
+            }
+        });
+        // 被单硬币支付
+        findViewById(R.id.tv_sheets_price_coin).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_sheets_price_coin, "10");
+            }
+        });
+        // 标准按钮
+        findViewById(R.id.bt_standard).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPrice(v, event, R.id.bt_standard, PRICE_STANDARD);
+            }
+        });
+        // 标准移动支付
+        findViewById(R.id.tv_standard_price_mobile).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_standard_price_mobile, "11");
+            }
+        });
+        // 标准硬币支付
+        findViewById(R.id.tv_standard_price_coin).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_standard_price_coin, "12");
+            }
+        });
+        // 洗液按钮
+        findViewById(R.id.bt_washing_liquid).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPrice(v, event, R.id.bt_washing_liquid, PRICE_WASHING_LIQUID);
+            }
+        });
+        // 洗液移动支付
+        findViewById(R.id.tv_washing_liquid_price_mobile).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_washing_liquid_price_mobile, "13");
+            }
+        });
+        // 洗液硬币支付
+        findViewById(R.id.tv_washing_liquid_price_coin).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_washing_liquid_price_coin, "14");
+            }
+        });
+        // 柔顺按钮
+        findViewById(R.id.bt_softening).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPrice(v, event, R.id.bt_softening, PRICE_SOFTENING);
+            }
+        });
+        // 柔顺移动支付
+        findViewById(R.id.tv_softening_price_mobile).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_softening_price_mobile, "15");
+            }
+        });
+        // 柔顺硬币支付
+        findViewById(R.id.tv_softening_price_coin).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_softening_price_coin, "16");
+            }
+        });
+        // 中消按钮
+        findViewById(R.id.bt_disinfection_ing).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPrice(v, event, R.id.bt_disinfection_ing, PRICE_DISINFECTION_ING);
+            }
+        });
+        // 中消移动支付
+        findViewById(R.id.tv_disinfection_ing_price_mobile).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_disinfection_ing_price_mobile, "17");
+            }
+        });
+        // 中消硬币支付
+        findViewById(R.id.tv_disinfection_ing_price_coin).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_disinfection_ing_price_coin, "18");
+            }
+        });
+        // 前消按钮
+        findViewById(R.id.bt_disinfection_before).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPrice(v, event, R.id.bt_disinfection_before, PRICE_DISINFECTION_BEFORE);
+            }
+        });
+        // 前消移动支付
+        findViewById(R.id.tv_disinfection_before_price_mobile).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_disinfection_before_price_mobile, "19");
+            }
+        });
+        // 前消硬币支付
+        findViewById(R.id.tv_disinfection_before_price_coin).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return onTouchPricePay(v, event, R.id.tv_disinfection_before_price_coin, "20");
+            }
+        });
+    }
 
+    /**
+     * 定价价格区逻辑
+     *
+     * @param v
+     * @param event
+     * @param tvId
+     * @param tvSelectModel
+     * @return
+     */
+    private boolean onTouchPricePay(View v, MotionEvent event, int tvId, String tvSelectModel) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (PRICE_DRYING.equals(modelPrice)) {
+                // 甩干按钮选择状态
+                v.setBackgroundResource(R.drawable.c09_tv_select_shape);
+                // 还原其他定价按钮状态
+                restoreTvPriceButton(tvId);
+                getTvSelectModel = tvSelectModel;
+            }
+        }
+        return false;
+    }
 
+    /**
+     * 定价模式按钮逻辑
+     *
+     * @param v
+     * @param event
+     * @param btId
+     * @param priceModel
+     * @return
+     */
+    private boolean onTouchPrice(View v, MotionEvent event, int btId, String priceModel) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            // 播放按键声音
+            playSound();
+            if (!washingMachinesSelect.isEmpty()) {
+                // 甩干按钮选择状态
+                v.setBackgroundResource(R.drawable.c09_bt_accessories_select_shape);
+                // 还原其他定价按钮状态
+                restorePriceButton(btId);
+                modelPrice = priceModel;
+            } else {
+                alertMsg("Tips", "请先选择洗衣机！");
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 还原定价区价格状态
+     *
+     * @param tvId
+     */
+    private void restoreTvPriceButton(int tvId) {
+        int[] ints = {R.id.tv_drying_price_mobile,
+                R.id.tv_drying_price_coin,
+                R.id.tv_rinse_price_mobile,
+                R.id.tv_rinse_price_coin,
+                R.id.tv_cowboy_price_mobile,
+                R.id.tv_cowboy_price_coin,
+                R.id.tv_sheets_price_mobile,
+                R.id.tv_sheets_price_coin,
+                R.id.tv_standard_price_mobile,
+                R.id.tv_standard_price_coin,
+                R.id.tv_washing_liquid_price_mobile,
+                R.id.tv_washing_liquid_price_coin,
+                R.id.tv_softening_price_mobile,
+                R.id.tv_softening_price_coin,
+                R.id.tv_disinfection_ing_price_mobile,
+                R.id.tv_disinfection_ing_price_coin,
+                R.id.tv_disinfection_before_price_mobile,
+                R.id.tv_disinfection_before_price_coin};
+        for (int i : ints) {
+            if (i != tvId) {
+                findViewById(i).setBackgroundResource(R.drawable.c09_tv_price_shape);
+            }
+        }
+    }
+
+    /**
+     * 还原定价区按钮状态
+     *
+     * @param btId
+     */
+    private void restorePriceButton(int btId) {
+        int[] ints = {R.id.bt_drying,
+                R.id.bt_rinse,
+                R.id.bt_cowboy,
+                R.id.bt_sheets,
+                R.id.bt_standard,
+                R.id.bt_washing_liquid,
+                R.id.bt_softening,
+                R.id.bt_disinfection_ing,
+                R.id.bt_disinfection_before};
+        for (int i : ints) {
+            if (i != btId) {
+                findViewById(i).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+            }
+        }
     }
 
     /**
@@ -360,7 +659,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            insertPassword("1");
+                            insertPassword("1", getTvSelectModel);
                             break;
                         case TEST:
 
@@ -384,7 +683,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            insertPassword("2");
+                            insertPassword("2", getTvSelectModel);
                             break;
                         case TEST:
 
@@ -408,7 +707,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            insertPassword("3");
+                            insertPassword("3", getTvSelectModel);
                             break;
                         case TEST:
 
@@ -432,7 +731,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            insertPassword("4");
+                            insertPassword("4", getTvSelectModel);
                             break;
                         case TEST:
 
@@ -456,7 +755,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            insertPassword("5");
+                            insertPassword("5", getTvSelectModel);
                             break;
                         case TEST:
 
@@ -480,7 +779,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            insertPassword("6");
+                            insertPassword("6", getTvSelectModel);
                             break;
                         case TEST:
 
@@ -504,7 +803,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            insertPassword("7");
+                            insertPassword("7", getTvSelectModel);
                             break;
                         case TEST:
 
@@ -528,7 +827,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            insertPassword("8");
+                            insertPassword("8", getTvSelectModel);
                             break;
                         case TEST:
 
@@ -552,7 +851,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            insertPassword("9");
+                            insertPassword("9", getTvSelectModel);
                             break;
                         case TEST:
 
@@ -576,7 +875,7 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            insertPassword("0");
+                            insertPassword("0", getTvSelectModel);
                             break;
                         case TEST:
 
@@ -597,9 +896,12 @@ public class C09Activity extends Activity {
                             if (newPasswordOne.equals(newPasswordTwo)) {
                                 sqLiteDbHelper = new SQLiteDbHelper(getApplicationContext());
                                 SQLiteDatabase dbWrit = sqLiteDbHelper.getWritableDatabase();
-                                dbWrit.execSQL("insert into password_rule(rule, state) values ('" + newPasswordOne + "', '1')");
-                                dbWrit.execSQL("update password_rule set state = '0' where id = " + passwordRule.getId() + "");
-                                dbWrit.close();
+                                try {
+                                    dbWrit.execSQL("insert into password_rule(rule, state) values ('" + newPasswordOne + "', '1')");
+                                    dbWrit.execSQL("update password_rule set state = '0' where id = " + passwordRule.getId() + "");
+                                } finally {
+                                    dbWrit.close();
+                                }
                                 passwordRule.setRule(newPasswordOne);
                                 resetModifyPassword();
                                 alertMsg("Tips", "修改成功！");
@@ -612,7 +914,15 @@ public class C09Activity extends Activity {
 
                             break;
                         case PRICE:
-                            modelButtonLight(PRICE);
+                            if ("".equals(modelPrice)) {
+                                // 验证密码点亮按钮
+                                modelButtonLight(PRICE);
+                            } else {
+                                // 修改数据入库
+                                modifyPrice();
+                                // 重置定价参数
+
+                            }
                             break;
                         case TEST:
 
@@ -774,6 +1084,44 @@ public class C09Activity extends Activity {
     }
 
     /**
+     * 修改定价入库
+     */
+    private void modifyPrice() {
+        sqLiteDbHelper = new SQLiteDbHelper(getApplicationContext());
+        SQLiteDatabase dbWrit = sqLiteDbHelper.getWritableDatabase();
+        try {
+            for (WashingMachine machine : washingMachinesSelect) {
+                ContentValues cv = new ContentValues();
+                cv.put("cowboy_price_coin", machine.getCowboyPriceCoin());
+                cv.put("cowboy_price_mobile", machine.getCowboyPriceMobile());
+                cv.put("disinfection_before_price_coin", machine.getDisinfectionBeforePriceCoin());
+                cv.put("disinfection_before_price_mobile", machine.getDisinfectionBeforePriceMobile());
+                cv.put("disinfection_ing_price_coin", machine.getDisinfectionIngPriceCoin());
+                cv.put("disinfection_ing_price_mobile", machine.getDisinfectionIngPriceMobile());
+                cv.put("drying_price_coin", machine.getDryingPriceCoin());
+                cv.put("drying_price_mobile", machine.getDryingPriceMobile());
+                cv.put("rinse_price_coin", machine.getRinsePriceCoin());
+                cv.put("rinse_price_mobile", machine.getRinsePriceMobile());
+                cv.put("sheets_price_coin", machine.getSheetsPriceCoin());
+                cv.put("sheets_price_mobile", machine.getSheetsPriceMobile());
+                cv.put("softening_price_coin", machine.getSofteningPriceCoin());
+                cv.put("softening_price_mobile", machine.getSofteningPriceMobile());
+                cv.put("standard_price_coin", machine.getStandardPriceCoin());
+                cv.put("standard_price_mobile", machine.getStandardPriceMobile());
+                cv.put("washing_liquid_price_coin", machine.getWashingLiquidPriceCoin());
+                cv.put("washing_liquid_price_mobile", machine.getWashingLiquidPriceMobile());
+                dbWrit.update("washing_machine",
+                        cv,
+                        "Id = ?",
+                        new String[]{String.valueOf(machine.getId())});
+            }
+        } finally {
+            dbWrit.close();
+        }
+
+    }
+
+    /**
      * 清空密码输入框
      */
     private void clearPassword() {
@@ -786,11 +1134,161 @@ public class C09Activity extends Activity {
      * 密码输入
      *
      * @param num
+     * @param getTvSelectModel
      */
-    private void insertPassword(String num) {
-        stringTx = stringTx + num;
-        TextView tv = findViewById(R.id.tv_password);
-        tv.setText(stringTx);
+    private void insertPassword(String num, String getTvSelectModel) {
+        TextView tv;
+        switch (getTvSelectModel) {
+            case "3":
+                dryingPriceMobile = dryingPriceMobile + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceMobile(dryingPriceMobile);
+                }
+                tv = findViewById(R.id.tv_drying_price_mobile);
+                tv.setText(dryingPriceMobile);
+                break;
+            case "4":
+                dryingPriceCoin = dryingPriceCoin + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(dryingPriceCoin);
+                }
+                tv = findViewById(R.id.tv_drying_price_coin);
+                tv.setText(dryingPriceCoin);
+                break;
+            case "5":
+                rinsePriceMobile = rinsePriceMobile + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(rinsePriceMobile);
+                }
+                tv = findViewById(R.id.tv_rinse_price_mobile);
+                tv.setText(rinsePriceMobile);
+                break;
+            case "6":
+                rinsePriceCoin = rinsePriceCoin + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(rinsePriceCoin);
+                }
+                tv = findViewById(R.id.tv_rinse_price_coin);
+                tv.setText(rinsePriceCoin);
+                break;
+            case "7":
+                cowboyPriceMobile = cowboyPriceMobile + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(cowboyPriceMobile);
+                }
+                tv = findViewById(R.id.tv_cowboy_price_mobile);
+                tv.setText(cowboyPriceMobile);
+                break;
+            case "8":
+                cowboyPriceCoin = cowboyPriceCoin + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(cowboyPriceCoin);
+                }
+                tv = findViewById(R.id.tv_cowboy_price_coin);
+                tv.setText(cowboyPriceCoin);
+                break;
+            case "9":
+                sheetsPriceMobile = sheetsPriceMobile + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(sheetsPriceMobile);
+                }
+                tv = findViewById(R.id.tv_sheets_price_mobile);
+                tv.setText(sheetsPriceMobile);
+                break;
+            case "10":
+                sheetsPriceCoin = sheetsPriceCoin + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(sheetsPriceCoin);
+                }
+                tv = findViewById(R.id.tv_sheets_price_coin);
+                tv.setText(sheetsPriceCoin);
+                break;
+            case "11":
+                standardPriceMobile = standardPriceMobile + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(standardPriceMobile);
+                }
+                tv = findViewById(R.id.tv_standard_price_mobile);
+                tv.setText(standardPriceMobile);
+                break;
+            case "12":
+                standardPriceCoin = standardPriceCoin + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(standardPriceCoin);
+                }
+                tv = findViewById(R.id.tv_standard_price_coin);
+                tv.setText(standardPriceCoin);
+                break;
+            case "13":
+                washingLiquidPriceMobile = washingLiquidPriceMobile + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(washingLiquidPriceMobile);
+                }
+                tv = findViewById(R.id.tv_washing_liquid_price_mobile);
+                tv.setText(washingLiquidPriceMobile);
+                break;
+            case "14":
+                washingLiquidPriceCoin = washingLiquidPriceCoin + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(washingLiquidPriceCoin);
+                }
+                tv = findViewById(R.id.tv_washing_liquid_price_coin);
+                tv.setText(washingLiquidPriceCoin);
+                break;
+            case "15":
+                softeningPriceMobile = softeningPriceMobile + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(softeningPriceMobile);
+                }
+                tv = findViewById(R.id.tv_softening_price_mobile);
+                tv.setText(softeningPriceMobile);
+                break;
+            case "16":
+                softeningPriceCoin = softeningPriceCoin + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(softeningPriceCoin);
+                }
+                tv = findViewById(R.id.tv_softening_price_coin);
+                tv.setText(softeningPriceCoin);
+                break;
+            case "17":
+                disinfectionIngPriceMobile = disinfectionIngPriceMobile + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(disinfectionIngPriceMobile);
+                }
+                tv = findViewById(R.id.tv_disinfection_ing_price_mobile);
+                tv.setText(disinfectionIngPriceMobile);
+                break;
+            case "18":
+                disinfectionIngPriceCoin = disinfectionIngPriceCoin + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(disinfectionIngPriceCoin);
+                }
+                tv = findViewById(R.id.tv_disinfection_ing_price_coin);
+                tv.setText(disinfectionIngPriceCoin);
+                break;
+            case "19":
+                disinfectionBeforePriceMobile = disinfectionBeforePriceMobile + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(disinfectionBeforePriceMobile);
+                }
+                tv = findViewById(R.id.tv_disinfection_before_price_mobile);
+                tv.setText(disinfectionBeforePriceMobile);
+                break;
+            case "20":
+                disinfectionBeforePriceCoin = disinfectionBeforePriceCoin + num;
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(disinfectionBeforePriceCoin);
+                }
+                tv = findViewById(R.id.tv_disinfection_before_price_coin);
+                tv.setText(disinfectionBeforePriceCoin);
+                break;
+            default:
+                stringTx = stringTx + num;
+                tv = findViewById(R.id.tv_password);
+                tv.setText(stringTx);
+                break;
+        }
     }
 
     /**
