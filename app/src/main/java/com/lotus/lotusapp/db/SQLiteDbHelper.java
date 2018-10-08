@@ -99,7 +99,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // 删除 washing_machine 表
-        db.execSQL("drop table washing_machine");
+//        db.execSQL("drop table washing_machine");
         // 创建 washing_machine 表
         db.execSQL(WASHING_MACHINE_CREATE_TABLE_SQL);
         // washing_machine 表 添加测试数据

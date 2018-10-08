@@ -104,8 +104,8 @@ public class C09Activity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_c09);
         // 串口工具类初始化
-        serialPortUtil = new SerialPortUtil();
-        serialPortUtil.openSerialPort();
+        /*serialPortUtil = new SerialPortUtil();
+        serialPortUtil.openSerialPort();*/
         // 加载声音
         initSound();
         // 加载有效洗衣机
@@ -120,6 +120,8 @@ public class C09Activity extends Activity {
         functionNumButton();
         // 定价键区按钮逻辑
         functionPriceButton();
+        // 出币区按钮逻辑
+        functionCoinBoxButton();
         // 有效洗衣机选择集合
         functionWashingMachinesSelect();
         // 退出C界面
@@ -434,6 +436,26 @@ public class C09Activity extends Activity {
     }
 
     /**
+     * 出币区按钮逻辑
+     */
+    private void functionCoinBoxButton() {
+        findViewById(R.id.bt_big_switch).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // 播放按键声音
+                    playSound();
+                    // 修改模式
+                    model = OUT_MONEY;
+                    // 定价按钮常亮
+                    v.setBackgroundResource(R.drawable.c09_bt_accessories_select_shape);
+                }
+                return false;
+            }
+        });
+    }
+
+    /**
      * 定价键区按钮逻辑
      */
     private void functionPriceButton() {
@@ -463,14 +485,14 @@ public class C09Activity extends Activity {
         findViewById(R.id.tv_drying_price_mobile).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_drying_price_mobile, "3");
+                return onTouchPricePay(v, event, PRICE_DRYING, R.id.tv_drying_price_mobile, "3");
             }
         });
         // 甩干硬币支付
         findViewById(R.id.tv_drying_price_coin).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_drying_price_coin, "4");
+                return onTouchPricePay(v, event, PRICE_DRYING, R.id.tv_drying_price_coin, "4");
             }
         });
         // 漂洗按钮
@@ -484,14 +506,14 @@ public class C09Activity extends Activity {
         findViewById(R.id.tv_rinse_price_mobile).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_rinse_price_mobile, "5");
+                return onTouchPricePay(v, event, PRICE_RINSE, R.id.tv_rinse_price_mobile, "5");
             }
         });
         // 漂洗硬币支付
         findViewById(R.id.tv_rinse_price_coin).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_rinse_price_coin, "6");
+                return onTouchPricePay(v, event, PRICE_RINSE, R.id.tv_rinse_price_coin, "6");
             }
         });
         // 牛仔按钮
@@ -505,14 +527,14 @@ public class C09Activity extends Activity {
         findViewById(R.id.tv_cowboy_price_mobile).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_cowboy_price_mobile, "7");
+                return onTouchPricePay(v, event, PRICE_COWBOY, R.id.tv_cowboy_price_mobile, "7");
             }
         });
         // 牛仔硬币支付
         findViewById(R.id.tv_cowboy_price_coin).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_cowboy_price_coin, "8");
+                return onTouchPricePay(v, event, PRICE_COWBOY, R.id.tv_cowboy_price_coin, "8");
             }
         });
         // 被单按钮
@@ -526,14 +548,14 @@ public class C09Activity extends Activity {
         findViewById(R.id.tv_sheets_price_mobile).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_sheets_price_mobile, "9");
+                return onTouchPricePay(v, event, PRICE_SHEETS, R.id.tv_sheets_price_mobile, "9");
             }
         });
         // 被单硬币支付
         findViewById(R.id.tv_sheets_price_coin).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_sheets_price_coin, "10");
+                return onTouchPricePay(v, event, PRICE_SHEETS, R.id.tv_sheets_price_coin, "10");
             }
         });
         // 标准按钮
@@ -547,14 +569,14 @@ public class C09Activity extends Activity {
         findViewById(R.id.tv_standard_price_mobile).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_standard_price_mobile, "11");
+                return onTouchPricePay(v, event, PRICE_STANDARD, R.id.tv_standard_price_mobile, "11");
             }
         });
         // 标准硬币支付
         findViewById(R.id.tv_standard_price_coin).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_standard_price_coin, "12");
+                return onTouchPricePay(v, event, PRICE_STANDARD, R.id.tv_standard_price_coin, "12");
             }
         });
         // 洗液按钮
@@ -568,14 +590,14 @@ public class C09Activity extends Activity {
         findViewById(R.id.tv_washing_liquid_price_mobile).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_washing_liquid_price_mobile, "13");
+                return onTouchPricePay(v, event, PRICE_WASHING_LIQUID, R.id.tv_washing_liquid_price_mobile, "13");
             }
         });
         // 洗液硬币支付
         findViewById(R.id.tv_washing_liquid_price_coin).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_washing_liquid_price_coin, "14");
+                return onTouchPricePay(v, event, PRICE_WASHING_LIQUID, R.id.tv_washing_liquid_price_coin, "14");
             }
         });
         // 柔顺按钮
@@ -589,14 +611,14 @@ public class C09Activity extends Activity {
         findViewById(R.id.tv_softening_price_mobile).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_softening_price_mobile, "15");
+                return onTouchPricePay(v, event, PRICE_SOFTENING, R.id.tv_softening_price_mobile, "15");
             }
         });
         // 柔顺硬币支付
         findViewById(R.id.tv_softening_price_coin).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_softening_price_coin, "16");
+                return onTouchPricePay(v, event, PRICE_SOFTENING, R.id.tv_softening_price_coin, "16");
             }
         });
         // 中消按钮
@@ -610,14 +632,14 @@ public class C09Activity extends Activity {
         findViewById(R.id.tv_disinfection_ing_price_mobile).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_disinfection_ing_price_mobile, "17");
+                return onTouchPricePay(v, event, PRICE_DISINFECTION_ING, R.id.tv_disinfection_ing_price_mobile, "17");
             }
         });
         // 中消硬币支付
         findViewById(R.id.tv_disinfection_ing_price_coin).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_disinfection_ing_price_coin, "18");
+                return onTouchPricePay(v, event, PRICE_DISINFECTION_ING, R.id.tv_disinfection_ing_price_coin, "18");
             }
         });
         // 前消按钮
@@ -631,30 +653,30 @@ public class C09Activity extends Activity {
         findViewById(R.id.tv_disinfection_before_price_mobile).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_disinfection_before_price_mobile, "19");
+                return onTouchPricePay(v, event, PRICE_DISINFECTION_BEFORE, R.id.tv_disinfection_before_price_mobile, "19");
             }
         });
         // 前消硬币支付
         findViewById(R.id.tv_disinfection_before_price_coin).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                return onTouchPricePay(v, event, R.id.tv_disinfection_before_price_coin, "20");
+                return onTouchPricePay(v, event, PRICE_DISINFECTION_BEFORE, R.id.tv_disinfection_before_price_coin, "20");
             }
         });
     }
 
     /**
      * 定价价格区逻辑
-     *
      * @param v
      * @param event
+     * @param model
      * @param tvId
      * @param tvSelectModel
      * @return
      */
-    private boolean onTouchPricePay(View v, MotionEvent event, int tvId, String tvSelectModel) {
+    private boolean onTouchPricePay(View v, MotionEvent event, String model, int tvId, String tvSelectModel) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            if (PRICE_DRYING.equals(modelPrice)) {
+            if (model.equals(modelPrice)) {
                 // 甩干按钮选择状态
                 v.setBackgroundResource(R.drawable.c09_tv_select_shape);
                 // 还原其他定价按钮状态
@@ -1131,6 +1153,8 @@ public class C09Activity extends Activity {
         ashWashingMachineButton(washingMachinesSelect, false);
         // 选中洗衣机集合置空
         washingMachinesSelect = new ArrayList<>();
+        // 情况密码区
+        clearPassword();
 
     }
 
