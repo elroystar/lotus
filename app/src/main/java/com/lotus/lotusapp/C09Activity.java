@@ -1100,6 +1100,8 @@ public class C09Activity extends Activity {
     private void resetPriceProperty() {
         // 定价按钮还原
         findViewById(R.id.bt_accessories).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+        // 定价选择区按钮置灰
+        ashPriceButton(false);
         // 模块选择还原
         model = "";
         // 显示框选择还原
@@ -1128,11 +1130,8 @@ public class C09Activity extends Activity {
         disinfectionIngPriceCoin = "";
         disinfectionBeforePriceMobile = "";
         disinfectionBeforePriceCoin = "";
-        // 选中洗衣机按钮还原
-        for (WashingMachine machine : washingMachinesSelect) {
-            int machineId = getResources().getIdentifier("bt_washing_machine_" + machine.getNum(), "id", getPackageName());
-            findViewById(machineId).setBackgroundResource(R.drawable.c09_bt_model_shape);
-        }
+        // 洗衣机按钮置灰
+        ashWashingMachineButton(washingMachinesSelect, false);
         // 选中洗衣机集合置空
         washingMachinesSelect = new ArrayList<>();
 
@@ -1401,148 +1400,220 @@ public class C09Activity extends Activity {
         TextView tv;
         switch (getTvSelectModel) {
             case "3":
-                dryingPriceMobile = dryingPriceMobile + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceMobile(dryingPriceMobile);
+                if (dryingPriceMobile.length() < 2) {
+                    dryingPriceMobile = dryingPriceMobile + num;
+                } else if (dryingPriceMobile.length() == 2 && dryingPriceMobile.length() < 3) {
+                    dryingPriceMobile = dryingPriceMobile + "." + num;
                 }
                 tv = findViewById(R.id.tv_drying_price_mobile);
                 tv.setText(dryingPriceMobile);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceMobile(dryingPriceMobile);
+                }
                 break;
             case "4":
-                dryingPriceCoin = dryingPriceCoin + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(dryingPriceCoin);
+                if (dryingPriceCoin.length() < 2) {
+                    dryingPriceCoin = dryingPriceCoin + num;
+                } else if (dryingPriceCoin.length() == 2 && dryingPriceCoin.length() < 3) {
+                    dryingPriceCoin = dryingPriceCoin + "." + num;
                 }
                 tv = findViewById(R.id.tv_drying_price_coin);
                 tv.setText(dryingPriceCoin);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDryingPriceCoin(dryingPriceCoin);
+                }
                 break;
             case "5":
-                rinsePriceMobile = rinsePriceMobile + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(rinsePriceMobile);
+                if (rinsePriceMobile.length() < 2) {
+                    rinsePriceMobile = rinsePriceMobile + num;
+                } else if (rinsePriceMobile.length() == 2 && rinsePriceMobile.length() < 3) {
+                    rinsePriceMobile = rinsePriceMobile + "." + num;
                 }
                 tv = findViewById(R.id.tv_rinse_price_mobile);
                 tv.setText(rinsePriceMobile);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setRinsePriceMobile(rinsePriceMobile);
+                }
                 break;
             case "6":
-                rinsePriceCoin = rinsePriceCoin + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(rinsePriceCoin);
+                if (rinsePriceCoin.length() < 2) {
+                    rinsePriceCoin = rinsePriceCoin + num;
+                } else if (rinsePriceCoin.length() == 2 && rinsePriceCoin.length() < 3) {
+                    rinsePriceCoin = rinsePriceCoin + "." + num;
                 }
                 tv = findViewById(R.id.tv_rinse_price_coin);
                 tv.setText(rinsePriceCoin);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setRinsePriceCoin(rinsePriceCoin);
+                }
                 break;
             case "7":
-                cowboyPriceMobile = cowboyPriceMobile + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(cowboyPriceMobile);
+                if (cowboyPriceMobile.length() < 2) {
+                    cowboyPriceMobile = cowboyPriceMobile + num;
+                } else if (cowboyPriceMobile.length() == 2 && cowboyPriceMobile.length() < 3) {
+                    cowboyPriceMobile = cowboyPriceMobile + "." + num;
                 }
                 tv = findViewById(R.id.tv_cowboy_price_mobile);
                 tv.setText(cowboyPriceMobile);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setCowboyPriceMobile(cowboyPriceMobile);
+                }
                 break;
             case "8":
-                cowboyPriceCoin = cowboyPriceCoin + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(cowboyPriceCoin);
+                if (cowboyPriceCoin.length() < 2) {
+                    cowboyPriceCoin = cowboyPriceCoin + num;
+                } else if (cowboyPriceCoin.length() == 2 && cowboyPriceCoin.length() < 3) {
+                    cowboyPriceCoin = cowboyPriceCoin + "." + num;
                 }
                 tv = findViewById(R.id.tv_cowboy_price_coin);
                 tv.setText(cowboyPriceCoin);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setCowboyPriceCoin(cowboyPriceCoin);
+                }
                 break;
             case "9":
-                sheetsPriceMobile = sheetsPriceMobile + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(sheetsPriceMobile);
+                if (sheetsPriceMobile.length() < 2) {
+                    sheetsPriceMobile = sheetsPriceMobile + num;
+                } else if (sheetsPriceMobile.length() == 2 && sheetsPriceMobile.length() < 3) {
+                    sheetsPriceMobile = sheetsPriceMobile + "." + num;
                 }
                 tv = findViewById(R.id.tv_sheets_price_mobile);
                 tv.setText(sheetsPriceMobile);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setSheetsPriceMobile(sheetsPriceMobile);
+                }
                 break;
             case "10":
-                sheetsPriceCoin = sheetsPriceCoin + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(sheetsPriceCoin);
+                if (sheetsPriceCoin.length() < 2) {
+                    sheetsPriceCoin = sheetsPriceCoin + num;
+                } else if (sheetsPriceCoin.length() == 2 && sheetsPriceCoin.length() < 3) {
+                    sheetsPriceCoin = sheetsPriceCoin + "." + num;
                 }
                 tv = findViewById(R.id.tv_sheets_price_coin);
                 tv.setText(sheetsPriceCoin);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setSheetsPriceCoin(sheetsPriceCoin);
+                }
                 break;
             case "11":
-                standardPriceMobile = standardPriceMobile + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(standardPriceMobile);
+                if (standardPriceMobile.length() < 2) {
+                    standardPriceMobile = standardPriceMobile + num;
+                } else if (standardPriceMobile.length() == 2 && standardPriceMobile.length() < 3) {
+                    standardPriceMobile = standardPriceMobile + "." + num;
                 }
                 tv = findViewById(R.id.tv_standard_price_mobile);
                 tv.setText(standardPriceMobile);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setStandardPriceMobile(standardPriceMobile);
+                }
                 break;
             case "12":
-                standardPriceCoin = standardPriceCoin + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(standardPriceCoin);
+                if (standardPriceCoin.length() < 2) {
+                    standardPriceCoin = standardPriceCoin + num;
+                } else if (standardPriceCoin.length() == 2 && standardPriceCoin.length() < 3) {
+                    standardPriceCoin = standardPriceCoin + "." + num;
                 }
                 tv = findViewById(R.id.tv_standard_price_coin);
                 tv.setText(standardPriceCoin);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setStandardPriceCoin(standardPriceCoin);
+                }
                 break;
             case "13":
-                washingLiquidPriceMobile = washingLiquidPriceMobile + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(washingLiquidPriceMobile);
+                if (washingLiquidPriceMobile.length() < 2) {
+                    washingLiquidPriceMobile = washingLiquidPriceMobile + num;
+                } else if (washingLiquidPriceMobile.length() == 2 && washingLiquidPriceMobile.length() < 3) {
+                    washingLiquidPriceMobile = washingLiquidPriceMobile + "." + num;
                 }
                 tv = findViewById(R.id.tv_washing_liquid_price_mobile);
                 tv.setText(washingLiquidPriceMobile);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setWashingLiquidPriceMobile(washingLiquidPriceMobile);
+                }
                 break;
             case "14":
-                washingLiquidPriceCoin = washingLiquidPriceCoin + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(washingLiquidPriceCoin);
+                if (washingLiquidPriceCoin.length() < 2) {
+                    washingLiquidPriceCoin = washingLiquidPriceCoin + num;
+                } else if (washingLiquidPriceCoin.length() == 2 && washingLiquidPriceCoin.length() < 3) {
+                    washingLiquidPriceCoin = washingLiquidPriceCoin + "." + num;
                 }
                 tv = findViewById(R.id.tv_washing_liquid_price_coin);
                 tv.setText(washingLiquidPriceCoin);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setWashingLiquidPriceCoin(washingLiquidPriceCoin);
+                }
                 break;
             case "15":
-                softeningPriceMobile = softeningPriceMobile + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(softeningPriceMobile);
+                if (softeningPriceMobile.length() < 2) {
+                    softeningPriceMobile = softeningPriceMobile + num;
+                } else if (softeningPriceMobile.length() == 2 && softeningPriceMobile.length() < 3) {
+                    softeningPriceMobile = softeningPriceMobile + "." + num;
                 }
                 tv = findViewById(R.id.tv_softening_price_mobile);
                 tv.setText(softeningPriceMobile);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setSofteningPriceMobile(softeningPriceMobile);
+                }
                 break;
             case "16":
-                softeningPriceCoin = softeningPriceCoin + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(softeningPriceCoin);
+                if (softeningPriceCoin.length() < 2) {
+                    softeningPriceCoin = softeningPriceCoin + num;
+                } else if (softeningPriceCoin.length() == 2 && softeningPriceCoin.length() < 3) {
+                    softeningPriceCoin = softeningPriceCoin + "." + num;
                 }
                 tv = findViewById(R.id.tv_softening_price_coin);
                 tv.setText(softeningPriceCoin);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setSofteningPriceCoin(softeningPriceCoin);
+                }
                 break;
             case "17":
-                disinfectionIngPriceMobile = disinfectionIngPriceMobile + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(disinfectionIngPriceMobile);
+                if (disinfectionIngPriceMobile.length() < 2) {
+                    disinfectionIngPriceMobile = disinfectionIngPriceMobile + num;
+                } else if (disinfectionIngPriceMobile.length() == 2 && disinfectionIngPriceMobile.length() < 3) {
+                    disinfectionIngPriceMobile = disinfectionIngPriceMobile + "." + num;
                 }
                 tv = findViewById(R.id.tv_disinfection_ing_price_mobile);
                 tv.setText(disinfectionIngPriceMobile);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDisinfectionIngPriceMobile(disinfectionIngPriceMobile);
+                }
                 break;
             case "18":
-                disinfectionIngPriceCoin = disinfectionIngPriceCoin + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(disinfectionIngPriceCoin);
+                if (disinfectionIngPriceCoin.length() < 2) {
+                    disinfectionIngPriceCoin = disinfectionIngPriceCoin + num;
+                } else if (disinfectionIngPriceCoin.length() == 2 && disinfectionIngPriceCoin.length() < 3) {
+                    disinfectionIngPriceCoin = disinfectionIngPriceCoin + "." + num;
                 }
                 tv = findViewById(R.id.tv_disinfection_ing_price_coin);
                 tv.setText(disinfectionIngPriceCoin);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDisinfectionIngPriceCoin(disinfectionIngPriceCoin);
+                }
                 break;
             case "19":
-                disinfectionBeforePriceMobile = disinfectionBeforePriceMobile + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(disinfectionBeforePriceMobile);
+                if (disinfectionBeforePriceMobile.length() < 2) {
+                    disinfectionBeforePriceMobile = disinfectionBeforePriceMobile + num;
+                } else if (disinfectionBeforePriceMobile.length() == 2 && disinfectionBeforePriceMobile.length() < 3) {
+                    disinfectionBeforePriceMobile = disinfectionBeforePriceMobile + "." + num;
                 }
                 tv = findViewById(R.id.tv_disinfection_before_price_mobile);
                 tv.setText(disinfectionBeforePriceMobile);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDisinfectionBeforePriceMobile(disinfectionBeforePriceMobile);
+                }
                 break;
             case "20":
-                disinfectionBeforePriceCoin = disinfectionBeforePriceCoin + num;
-                for (WashingMachine machine : washingMachinesSelect) {
-                    machine.setDryingPriceCoin(disinfectionBeforePriceCoin);
+                if (disinfectionBeforePriceCoin.length() < 2) {
+                    disinfectionBeforePriceCoin = disinfectionBeforePriceCoin + num;
+                } else if (disinfectionBeforePriceCoin.length() == 2 && disinfectionBeforePriceCoin.length() < 3) {
+                    disinfectionBeforePriceCoin = disinfectionBeforePriceCoin + "." + num;
                 }
                 tv = findViewById(R.id.tv_disinfection_before_price_coin);
                 tv.setText(disinfectionBeforePriceCoin);
+                for (WashingMachine machine : washingMachinesSelect) {
+                    machine.setDisinfectionBeforePriceCoin(disinfectionBeforePriceCoin);
+                }
                 break;
             default:
                 stringTx = stringTx + num;
