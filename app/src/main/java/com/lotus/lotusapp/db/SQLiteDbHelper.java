@@ -11,7 +11,7 @@ import com.lotus.lotusapp.utils.DateUtil;
  */
 public class SQLiteDbHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 4;
+    private static final int DB_VERSION = 5;
     private static final String DB_NAME = "lotusDB";
     private static final String TABLE_USER = "user";
     private static final String TABLE_PASSWORD_BANK = "password_bank";
@@ -66,6 +66,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             + "standard_price_coin varchar(10) not null default '0',"
             + "standard_price_mobile varchar(10) not null default '0',"
             + "washing_liquid_price_coin varchar(10) not null default '0',"
+            + "washing_liquid_price_mobile varchar(10) not null default '0',"
             + "create_time timestamp default (datetime('now','localtime')),"
             + "update_time timestamp default (datetime('now','localtime'))"
             + ");";
