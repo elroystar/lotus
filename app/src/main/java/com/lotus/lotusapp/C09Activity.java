@@ -18,6 +18,7 @@ import com.lotus.lotusapp.dto.PasswordRule;
 import com.lotus.lotusapp.dto.WashingMachine;
 import com.lotus.lotusapp.utils.DateUtil;
 import com.lotus.lotusapp.utils.PasswordRuleUtil;
+import com.lotus.lotusapp.utils.SerialPortUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,29 +40,24 @@ public class C09Activity extends Activity {
     public static final String PRICE_SOFTENING = "price_softening";
     public static final String PRICE_DISINFECTION_ING = "price_disinfection_ing";
     public static final String PRICE_DISINFECTION_BEFORE = "price_disinfection_before";
-
     // C界面模式选择，默认为修改密码模式
     private String model = "";
     // 定价区选择模式
     private String modelPrice = "";
-
     // 密码规则
     private PasswordRule passwordRule;
-
     // 数据库连接工具
     private SQLiteDbHelper sqLiteDbHelper;
-
     // 声明soundPool
     private SoundPool soundPool;
-
     // 定义一个整型用load(),来设置soundID
     private int music;
-
     // 有效洗衣机集合
     private List<WashingMachine> washingMachines = new ArrayList<>();
     // 选中洗衣机集合
     private List<WashingMachine> washingMachinesSelect = new ArrayList<>();
-
+    //定义串口工具常量
+    private SerialPortUtil serialPortUtil;
     /**
      * textView选中判断条件
      * 1：新1修改密码
@@ -76,13 +72,11 @@ public class C09Activity extends Activity {
      * 10：
      */
     private String getTvSelectModel = "";
-
     /**
      * 修改密码区逻辑
      */
     private String newPasswordOne = "";
     private String newPasswordTwo = "";
-
     // 数字输入框字符串
     private String stringTx = "";
     // 价格区变量
@@ -109,6 +103,9 @@ public class C09Activity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_c09);
+        // 串口工具类初始化
+        serialPortUtil = new SerialPortUtil();
+        serialPortUtil.openSerialPort();
         // 加载声音
         initSound();
         // 加载有效洗衣机
