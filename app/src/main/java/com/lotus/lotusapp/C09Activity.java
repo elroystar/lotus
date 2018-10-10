@@ -9,16 +9,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.lotus.lotusapp.constance.CmdConstance;
 import com.lotus.lotusapp.db.SQLiteDbHelper;
+import com.lotus.lotusapp.dto.CoinBox;
 import com.lotus.lotusapp.dto.PasswordRule;
 import com.lotus.lotusapp.dto.WashingMachine;
 import com.lotus.lotusapp.utils.DateUtil;
 import com.lotus.lotusapp.utils.PasswordRuleUtil;
 import com.lotus.lotusapp.utils.SerialPortUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +61,8 @@ public class C09Activity extends Activity {
     private int music;
     // 有效洗衣机集合
     private List<WashingMachine> washingMachines = new ArrayList<>();
+    // 投币箱
+    private CoinBox coinBox;
     // 选中洗衣机集合
     private List<WashingMachine> washingMachinesSelect = new ArrayList<>();
     //定义串口工具常量
@@ -108,8 +117,12 @@ public class C09Activity extends Activity {
         serialPortUtil.openSerialPort();*/
         // 加载声音
         initSound();
+        //注册EventBus
+        EventBus.getDefault().register(this);
         // 加载有效洗衣机
         initEffectiveWash();
+        // 加载投币箱
+        initEffectiveCoinBox();
         // 获取显示密码规则
         showPasswordRule();
         // 置灰不可选择按钮
@@ -144,6 +157,13 @@ public class C09Activity extends Activity {
                 startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 关闭串口
+        serialPortUtil.closeSerialPort();
     }
 
     /**
@@ -280,7 +300,7 @@ public class C09Activity extends Activity {
     private void ashNoChoiceButton(String model) {
         switch (model) {
             case OUT_MONEY:
-                ashOutMoneyButton();
+                ashOutMoneyButton(false, null);
                 break;
             case PRICE:
                 ashPriceButton(false);
@@ -292,26 +312,42 @@ public class C09Activity extends Activity {
                 ashWashingMachineButton(null, false);
                 break;
             case COIN_BOX:
-                ashCoinBoxButton();
+                ashCoinBoxButton(null, false);
                 break;
             default:
-                ashOutMoneyButton();
+                ashOutMoneyButton(false, null);
                 ashPriceButton(false);
                 ashTestButton();
                 ashWashingMachineButton(null, false);
-                ashCoinBoxButton();
+                ashCoinBoxButton(null, false);
                 break;
         }
     }
 
     /**
      * 置灰投币箱
+     *
+     * @param coinBox
+     * @param buttonLight
      */
-    private void ashCoinBoxButton() {
-        for (int i = 1; i <= 4; i++) {
-            // 获取textView id
-            int bt_coin_box = getResources().getIdentifier("bt_coin_box_" + i, "id", getPackageName());
-            ashButton(bt_coin_box, R.drawable.c09_bt_ash_shape, false);
+    private void ashCoinBoxButton(CoinBox coinBox, Boolean buttonLight) {
+        if (null != coinBox) {
+            int bt_coin_box = getResources().getIdentifier("bt_coin_box_" + coinBox.getNum(), "id", getPackageName());
+            if (buttonLight) {
+                ashButton(bt_coin_box, R.drawable.c09_bt_big_switch_shape, true);
+            } else {
+                ashButton(bt_coin_box, R.drawable.c09_bt_ash_shape, false);
+            }
+        } else {
+            for (int i = 1; i <= 4; i++) {
+                // 获取textView id
+                int bt_coin_box = getResources().getIdentifier("bt_coin_box_" + i, "id", getPackageName());
+                if (buttonLight) {
+                    ashButton(bt_coin_box, R.drawable.c09_bt_big_switch_shape, true);
+                } else {
+                    ashButton(bt_coin_box, R.drawable.c09_bt_ash_shape, false);
+                }
+            }
         }
     }
 
@@ -395,10 +431,22 @@ public class C09Activity extends Activity {
 
     /**
      * 置灰出币开关
+     *
+     * @param buttonLight
+     * @param oc
      */
-    private void ashOutMoneyButton() {
-        ashButton(R.id.bt_on_switch, R.drawable.c09_bt_ash_shape, false);
-        ashButton(R.id.bt_un_switch, R.drawable.c09_bt_ash_shape, false);
+    private void ashOutMoneyButton(Boolean buttonLight, String oc) {
+        if (buttonLight) {
+            if ("open".equals(oc)) {
+                ashButton(R.id.bt_open_switch, R.drawable.c09_bt_big_switch_shape, true);
+            }
+            if ("close".equals(oc)) {
+                ashButton(R.id.bt_close_switch, R.drawable.c09_bt_big_switch_shape, true);
+            }
+        } else {
+            ashButton(R.id.bt_open_switch, R.drawable.c09_bt_ash_shape, false);
+            ashButton(R.id.bt_close_switch, R.drawable.c09_bt_ash_shape, false);
+        }
     }
 
     /**
@@ -439,6 +487,7 @@ public class C09Activity extends Activity {
      * 出币区按钮逻辑
      */
     private void functionCoinBoxButton() {
+        // 出币按键
         findViewById(R.id.bt_big_switch).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -447,8 +496,43 @@ public class C09Activity extends Activity {
                     playSound();
                     // 修改模式
                     model = OUT_MONEY;
-                    // 定价按钮常亮
-                    v.setBackgroundResource(R.drawable.c09_bt_accessories_select_shape);
+                    // 出币按钮常亮
+                    v.setBackgroundResource(R.drawable.c09_bt_big_switch_select_shape);
+                    // 其他两个按钮恢复
+                    findViewById(R.id.bt_accessories).setBackgroundResource(R.drawable.c09_bt_accessories_shape);
+                    findViewById(R.id.bt_short_program).setBackgroundResource(R.drawable.c09_bt_short_program_shape);
+
+                }
+                return false;
+            }
+        });
+        // 开按键
+        findViewById(R.id.bt_open_switch).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // 播放按键声音
+                    playSound();
+                    // 开按钮按钮常亮
+                    v.setBackgroundResource(R.drawable.c09_bt_big_switch_select_shape);
+                    // 发送开锁指令
+                    serialPortUtil.sendSerialPort(CmdConstance.COIN_BOX_OPEN);
+
+                }
+                return false;
+            }
+        });
+        // 关按键
+        findViewById(R.id.bt_close_switch).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    // 播放按键声音
+                    playSound();
+                    // 开按钮按钮常亮
+                    v.setBackgroundResource(R.drawable.c09_bt_big_switch_select_shape);
+                    // 发送关锁指令
+                    serialPortUtil.sendSerialPort(CmdConstance.COIN_BOX_CLOSE);
                 }
                 return false;
             }
@@ -470,6 +554,10 @@ public class C09Activity extends Activity {
                     model = PRICE;
                     // 定价按钮常亮
                     v.setBackgroundResource(R.drawable.c09_bt_accessories_select_shape);
+                    // 其他两个按钮恢复
+                    findViewById(R.id.bt_short_program).setBackgroundResource(R.drawable.c09_bt_short_program_shape);
+                    findViewById(R.id.bt_big_switch).setBackgroundResource(R.drawable.c09_bt_big_switch_shape);
+
                 }
                 return false;
             }
@@ -667,6 +755,7 @@ public class C09Activity extends Activity {
 
     /**
      * 定价价格区逻辑
+     *
      * @param v
      * @param event
      * @param model
@@ -799,12 +888,13 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             modifyPassword("1");
                             break;
                         case OUT_MONEY:
-
+                            insertPassword("1");
                             break;
                         case PRICE:
                             insertPassword("1", getTvSelectModel);
@@ -823,12 +913,13 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             modifyPassword("2");
                             break;
                         case OUT_MONEY:
-
+                            insertPassword("2");
                             break;
                         case PRICE:
                             insertPassword("2", getTvSelectModel);
@@ -847,12 +938,13 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             modifyPassword("3");
                             break;
                         case OUT_MONEY:
-
+                            insertPassword("3");
                             break;
                         case PRICE:
                             insertPassword("3", getTvSelectModel);
@@ -871,12 +963,13 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             modifyPassword("4");
                             break;
                         case OUT_MONEY:
-
+                            insertPassword("4");
                             break;
                         case PRICE:
                             insertPassword("4", getTvSelectModel);
@@ -895,12 +988,13 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             modifyPassword("5");
                             break;
                         case OUT_MONEY:
-
+                            insertPassword("5");
                             break;
                         case PRICE:
                             insertPassword("5", getTvSelectModel);
@@ -919,12 +1013,13 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             modifyPassword("6");
                             break;
                         case OUT_MONEY:
-
+                            insertPassword("6");
                             break;
                         case PRICE:
                             insertPassword("6", getTvSelectModel);
@@ -943,12 +1038,13 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             modifyPassword("7");
                             break;
                         case OUT_MONEY:
-
+                            insertPassword("7");
                             break;
                         case PRICE:
                             insertPassword("7", getTvSelectModel);
@@ -967,12 +1063,13 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             modifyPassword("8");
                             break;
                         case OUT_MONEY:
-
+                            insertPassword("8");
                             break;
                         case PRICE:
                             insertPassword("8", getTvSelectModel);
@@ -991,12 +1088,13 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             modifyPassword("9");
                             break;
                         case OUT_MONEY:
-
+                            insertPassword("9");
                             break;
                         case PRICE:
                             insertPassword("9", getTvSelectModel);
@@ -1015,12 +1113,13 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             modifyPassword("0");
                             break;
                         case OUT_MONEY:
-
+                            insertPassword("0");
                             break;
                         case PRICE:
                             insertPassword("0", getTvSelectModel);
@@ -1039,6 +1138,7 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             if (newPasswordOne.equals(newPasswordTwo)) {
@@ -1059,7 +1159,8 @@ public class C09Activity extends Activity {
                             }
                             break;
                         case OUT_MONEY:
-
+                            // 验证密码点亮按钮
+                            modelButtonLight(OUT_MONEY);
                             break;
                         case PRICE:
                             if ("".equals(modelPrice)) {
@@ -1086,6 +1187,7 @@ public class C09Activity extends Activity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    playSound();
                     switch (model) {
                         case MODIFY_PASSWORD:
                             resetModifyPassword();
@@ -1123,7 +1225,7 @@ public class C09Activity extends Activity {
         ashPriceButton(false);
         // 模块选择还原
         model = "";
-        // 显示框选择还原
+        // 定价显示框选择还原
         getTvSelectModel = "";
         // 定价区选择模块还原
         modelPrice = "";
@@ -1153,7 +1255,7 @@ public class C09Activity extends Activity {
         ashWashingMachineButton(washingMachinesSelect, false);
         // 选中洗衣机集合置空
         washingMachinesSelect = new ArrayList<>();
-        // 情况密码区
+        // 清空密码区
         clearPassword();
 
     }
@@ -1170,7 +1272,7 @@ public class C09Activity extends Activity {
         try {
             // 验证密码有限期
             // select * from password_bank where password = 'stringTx'
-            Cursor cursor = dbRead.query("password_bank",
+            Cursor cursor = dbRead.query(SQLiteDbHelper.TABLE_PASSWORD_BANK,
                     null,
                     "password = ?",
                     new String[]{stringTx},
@@ -1182,7 +1284,7 @@ public class C09Activity extends Activity {
             } else {
                 // 获取密码规则
                 // select * from password_rule where state = '1'
-                cursor = dbRead.query("password_rule",
+                cursor = dbRead.query(SQLiteDbHelper.TABLE_PASSWORD_RULE,
                         null,
                         "state = ?",
                         new String[]{"1"},
@@ -1202,7 +1304,10 @@ public class C09Activity extends Activity {
                         dbWrit.execSQL("insert into password_bank(password) values ('" + stringTx + "')");
                         switch (model) {
                             case OUT_MONEY:
-
+                                // 出币区开关按钮亮起
+                                ashOutMoneyButton(true, "open");
+                                // 点亮投币箱按钮
+                                ashCoinBoxButton(coinBox, true);
                                 break;
                             case PRICE:
                                 // 定价区按钮亮起
@@ -1229,6 +1334,37 @@ public class C09Activity extends Activity {
     }
 
     /**
+     * 加载投币箱
+     */
+    private void initEffectiveCoinBox() {
+        // 查询
+        sqLiteDbHelper = new SQLiteDbHelper(getApplicationContext());
+        SQLiteDatabase dbRead = sqLiteDbHelper.getReadableDatabase();
+        try {
+            // select * from coin_box where state = '1'
+            Cursor cursor = dbRead.query(SQLiteDbHelper.TABLE_COIN_BOX,
+                    null,
+                    "state = ?",
+                    new String[]{"1"},
+                    null,
+                    null,
+                    null);
+            if (cursor.getCount() > 0) {
+                while (cursor.moveToNext()) {
+                    coinBox = new CoinBox();
+                    coinBox.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                    coinBox.setNum(cursor.getInt(cursor.getColumnIndex("num")));
+                    coinBox.setState(cursor.getString(cursor.getColumnIndex("state")));
+                }
+            } else {
+                alertMsg("Error", "没有找到投币箱！");
+            }
+        } finally {
+            dbRead.close();
+        }
+    }
+
+    /**
      * 加载有效洗衣机
      */
     private void initEffectiveWash() {
@@ -1237,7 +1373,7 @@ public class C09Activity extends Activity {
         SQLiteDatabase dbRead = sqLiteDbHelper.getReadableDatabase();
         try {
             // select * from washer where state = '1'
-            Cursor cursor = dbRead.query("washing_machine",
+            Cursor cursor = dbRead.query(SQLiteDbHelper.TABLE_WASHING_MACHINE,
                     null,
                     "state = ?",
                     new String[]{"1"},
@@ -1409,6 +1545,17 @@ public class C09Activity extends Activity {
                 tv.setText(disinfectionBeforePriceCoin);
                 break;
         }
+    }
+
+    /**
+     * 输入密码
+     *
+     * @param num
+     */
+    private void insertPassword(String num) {
+        stringTx = stringTx + num;
+        TextView tv = findViewById(R.id.tv_password);
+        tv.setText(stringTx);
     }
 
     /**
@@ -1704,5 +1851,17 @@ public class C09Activity extends Activity {
      */
     private void playSound() {
         soundPool.play(music, 1, 1, 1, 0, 1);
+    }
+
+    /**
+     * 用EventBus进行线程间通信，也可以使用Handler
+     * @param string
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(String string){
+        Log.d("C09Activity","获取到了从传感器发送到Android主板的串口数据");
+        if (CmdConstance.COIN_REPLY.equals(string)) {
+            ashOutMoneyButton(true, "close");
+        }
     }
 }

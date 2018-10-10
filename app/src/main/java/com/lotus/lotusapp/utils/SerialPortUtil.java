@@ -2,7 +2,11 @@ package com.lotus.lotusapp.utils;
 
 import android.util.Log;
 
+import com.lotus.lotusapp.C09Activity;
 import com.lotus.lotusapp.api.SerialPort;
+import com.lotus.lotusapp.constance.CmdConstance;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,12 +35,12 @@ public class SerialPortUtil {
             //调用对象SerialPort方法，获取串口中"读和写"的数据流
             inputStream = serialPort.getInputStream();
             outputStream = serialPort.getOutputStream();
-            isStart = true;
+//            isStart = true;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        getSerialPort();
+//        getSerialPort();
     }
 
     /**
@@ -67,7 +71,7 @@ public class SerialPortUtil {
      */
     public void sendSerialPort(String data) {
         try {
-            byte[] sendData = DataUtils.HexToByteArr(data);
+            byte[] sendData = data.getBytes();
             outputStream.write(sendData);
             outputStream.flush();
         } catch (IOException e) {
@@ -86,7 +90,6 @@ public class SerialPortUtil {
     /**
      * 接收串口数据的线程
      */
-
     private class ReceiveThread extends Thread {
         @Override
         public void run() {
@@ -100,8 +103,10 @@ public class SerialPortUtil {
                 try {
                     int size = inputStream.read(readData);
                     if (size > 0) {
-                        String readString = DataUtils.ByteArrToHex(readData, 0, size);
+//                        String readString = DataUtils.ByteArrToHex(readData, 0, size);
+                        String readString = new String(readData, 0, size);
                         Log.i("SerialPortUtil", readString);
+                        EventBus.getDefault().post(readString);
                     }
 
                 } catch (IOException e) {

@@ -443,7 +443,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/bt_on_switch"
+                        android:id="@+id/bt_open_switch"
                         android:layout_width="175px"
                         android:layout_height="134px"
                         android:background="@drawable/c09_bt_big_switch_shape"
@@ -452,7 +452,7 @@
                         android:textSize="35sp" />
 
                     <Button
-                        android:id="@+id/bt_un_switch"
+                        android:id="@+id/bt_close_switch"
                         android:layout_width="175px"
                         android:layout_height="134px"
                         android:background="@drawable/c09_bt_big_switch_shape"

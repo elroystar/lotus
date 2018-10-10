@@ -11,12 +11,13 @@ import com.lotus.lotusapp.utils.DateUtil;
  */
 public class SQLiteDbHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 5;
+    private static final int DB_VERSION = 7;
     private static final String DB_NAME = "lotusDB";
-    private static final String TABLE_USER = "user";
-    private static final String TABLE_PASSWORD_BANK = "password_bank";
-    private static final String TABLE_PASSWORD_RULE = "password_rule";
-    private static final String TABLE_WASHING_MACHINE = "washing_machine";
+    public static final String TABLE_USER = "user";
+    public static final String TABLE_PASSWORD_BANK = "password_bank";
+    public static final String TABLE_PASSWORD_RULE = "password_rule";
+    public static final String TABLE_COIN_BOX = "coin_box";
+    public static final String TABLE_WASHING_MACHINE = "washing_machine";
     // 创建 user 表的 sql 语句
     private static final String USER_CREATE_TABLE_SQL = "create table " + TABLE_USER + "("
             + "id integer primary key autoincrement,"
@@ -39,6 +40,13 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             + "id integer primary key autoincrement,"
             + "rule varchar(6) not null,"
             + "state varchar(2) not null default '0',"
+            + "create_time timestamp default (datetime('now','localtime'))"
+            + ");";
+    // 创建 password_rule 表的 sql 语句
+    private static final String COIN_BOX_CREATE_TABLE_SQL = "create table " + TABLE_COIN_BOX + "("
+            + "id integer primary key autoincrement,"
+            + "num integer not null,"
+            + "state varchar(2) not null default '1',"
             + "create_time timestamp default (datetime('now','localtime'))"
             + ");";
     // 创建 wash_price 表的 sql 语句
@@ -72,7 +80,9 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             + ");";
     // 密码规则库默认规则333333
     private static final String PASSWORD_RULE_INSERT_DEFAULT_SQL = "insert into password_rule(rule, state) values ('333333', '1')";
+    // 测试数据
     private static final String WASHING_MACHINE_INSERT_TEST_SQL = "insert into washing_machine(num) values (1)";
+    private static final String COIN_BOX_INSERT_TEST_SQL = "insert into coin_box(num) values (1)";
 
     public SQLiteDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -93,6 +103,10 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL(WASHING_MACHINE_CREATE_TABLE_SQL);
         // 添加默认密码规则
         db.execSQL(PASSWORD_RULE_INSERT_DEFAULT_SQL);
+        // 创建 washing_machine 表
+        db.execSQL(WASHING_MACHINE_CREATE_TABLE_SQL);
+        // 创建 coin_box表
+        db.execSQL(COIN_BOX_CREATE_TABLE_SQL);
 
     }
 
@@ -101,9 +115,12 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         // 删除 washing_machine 表
 //        db.execSQL("drop table washing_machine");
         // 创建 washing_machine 表
-        db.execSQL(WASHING_MACHINE_CREATE_TABLE_SQL);
+//        db.execSQL(WASHING_MACHINE_CREATE_TABLE_SQL);
         // washing_machine 表 添加测试数据
-        db.execSQL(WASHING_MACHINE_INSERT_TEST_SQL);
+//        db.execSQL(WASHING_MACHINE_INSERT_TEST_SQL);
+        // 创建 coin_box表
+//        db.execSQL(COIN_BOX_CREATE_TABLE_SQL);
+        db.execSQL(COIN_BOX_INSERT_TEST_SQL);
 
     }
 }

@@ -183,7 +183,7 @@ public class MainActivity extends Activity {
                     // 判断输入数字是否为0开头和10位
                     if (stringTx.startsWith("0") && stringTx.length() == 10) {
                         // select * from user where phone = 'stringTx'
-                        Cursor cursor = dbRead.query("user",
+                        Cursor cursor = dbRead.query(SQLiteDbHelper.TABLE_USER,
                                 null,
                                 "phone = ?",
                                 new String[]{stringTx},
@@ -216,7 +216,7 @@ public class MainActivity extends Activity {
                     } else {
                         // 验证密码有限期
                         // select * from password_bank where password = 'stringTx'
-                        Cursor cursor = dbRead.query("password_bank",
+                        Cursor cursor = dbRead.query(SQLiteDbHelper.TABLE_PASSWORD_BANK,
                                 null,
                                 "password = ?",
                                 new String[]{stringTx},
@@ -228,7 +228,7 @@ public class MainActivity extends Activity {
                         } else {
                             // 获取密码规则
                             // select * from password_rule where state = '1'
-                            cursor = dbRead.query("password_rule",
+                            cursor = dbRead.query(SQLiteDbHelper.TABLE_PASSWORD_RULE,
                                     null,
                                     "state = ?",
                                     new String[]{"1"},
