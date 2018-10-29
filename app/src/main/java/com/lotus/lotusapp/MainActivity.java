@@ -74,6 +74,12 @@ public class MainActivity extends Activity {
 
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        stringTx = "";
+    }
+
     /**
      * 加载声音
      */
@@ -224,7 +230,7 @@ public class MainActivity extends Activity {
                                 null,
                                 null);
                         if (cursor.getCount() > 0) {
-                            alertMsg("Tips", "请验证后重新输入！");
+                            alertMsg("Tips", "密码" + stringTx + "已存在，请重新输入！");
                         } else {
                             // 获取密码规则
                             // select * from password_rule where state = '1'
@@ -251,7 +257,7 @@ public class MainActivity extends Activity {
                                     i.putExtra("passwordRule", passwordRule);
                                     startActivity(i);
                                 } else {
-                                    alertMsg("Tips", "请验证后重新输入！");
+                                    alertMsg("Tips", "当前输入密码：" + stringTx + "，请验证后重新输入！");
                                 }
                             } else {
                                 alertMsg("Error", "查询不到密码规则！");
@@ -290,7 +296,8 @@ public class MainActivity extends Activity {
                 tv.setText(txStr);
             }
             stringTx = stringTx + txStr;
-        } else if (event.getAction() == MotionEvent.ACTION_UP) {
+        }
+        if (event.getAction() == MotionEvent.ACTION_UP) {
             // 再修改为抬起时的正常图片
             loadImage(ib_num, this, filePath + File.separator + "cg", imgStr);
         }

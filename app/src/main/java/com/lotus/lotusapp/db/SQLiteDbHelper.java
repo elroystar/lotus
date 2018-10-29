@@ -11,7 +11,7 @@ import com.lotus.lotusapp.utils.DateUtil;
  */
 public class SQLiteDbHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 7;
+    private static final int DB_VERSION = 8;
     private static final String DB_NAME = "lotusDB";
     public static final String TABLE_USER = "user";
     public static final String TABLE_PASSWORD_BANK = "password_bank";
@@ -49,7 +49,7 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
             + "state varchar(2) not null default '1',"
             + "create_time timestamp default (datetime('now','localtime'))"
             + ");";
-    // 创建 wash_price 表的 sql 语句
+    // 创建 washing_machine 表的 sql 语句
     private static final String WASHING_MACHINE_CREATE_TABLE_SQL = "create table " + TABLE_WASHING_MACHINE + "("
             + "id integer primary key autoincrement,"
             + "num integer not null,"
@@ -97,10 +97,6 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
         db.execSQL(PASSWORD_BANK_CREATE_TABLE_SQL);
         // 创建 password_rule 表
         db.execSQL(PASSWORD_RULE_CREATE_TABLE_SQL);
-        // 创建 wash_price 表
-        db.execSQL(WASHING_MACHINE_CREATE_TABLE_SQL);
-        // 创建 washing_machine 表
-        db.execSQL(WASHING_MACHINE_CREATE_TABLE_SQL);
         // 添加默认密码规则
         db.execSQL(PASSWORD_RULE_INSERT_DEFAULT_SQL);
         // 创建 washing_machine 表
@@ -112,15 +108,23 @@ public class SQLiteDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // 删除 washing_machine 表
-//        db.execSQL("drop table washing_machine");
+        // 删除表
+        db.execSQL("drop table user");
+        db.execSQL("drop table password_bank");
+        db.execSQL("drop table password_rule");
+        db.execSQL("drop table washing_machine");
+        // 创建 user 表
+        db.execSQL(USER_CREATE_TABLE_SQL);
+        // 创建 password_bank 表
+        db.execSQL(PASSWORD_BANK_CREATE_TABLE_SQL);
+        // 创建 password_rule 表
+        db.execSQL(PASSWORD_RULE_CREATE_TABLE_SQL);
+        // 添加默认密码规则
+        db.execSQL(PASSWORD_RULE_INSERT_DEFAULT_SQL);
         // 创建 washing_machine 表
-//        db.execSQL(WASHING_MACHINE_CREATE_TABLE_SQL);
-        // washing_machine 表 添加测试数据
-//        db.execSQL(WASHING_MACHINE_INSERT_TEST_SQL);
+        db.execSQL(WASHING_MACHINE_CREATE_TABLE_SQL);
         // 创建 coin_box表
-//        db.execSQL(COIN_BOX_CREATE_TABLE_SQL);
-        db.execSQL(COIN_BOX_INSERT_TEST_SQL);
+        db.execSQL(COIN_BOX_CREATE_TABLE_SQL);
 
     }
 }

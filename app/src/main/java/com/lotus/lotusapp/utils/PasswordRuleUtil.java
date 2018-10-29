@@ -7,6 +7,7 @@ public class PasswordRuleUtil {
 
     /**
      * 校验密码
+     *
      * @param rule
      * @param password
      * @return
@@ -22,61 +23,41 @@ public class PasswordRuleUtil {
             int one = (arr[0] & 1) == 1 ? -arr[1] : arr[1];
             int two = (arr[2] & 1) == 1 ? -arr[3] : arr[3];
             int three = (arr[4] & 1) == 1 ? -arr[5] : arr[5];
-            // 密码转换string数组
-            String[] passwordArr = password.substring(password.indexOf("00")).split("00");
+            password = password.substring(password.indexOf("00"));
             // 校验第一次规则
-            arr = new int[passwordArr[1].length()];
-            if (arr.length > 0) {
-                for (int i = 0; i < passwordArr[1].length(); i++) {
-                    arr[i] = Integer.parseInt(passwordArr[1].substring(i, i + 1));
+            arr = new int[password.length()];
+            for (int i = 0; i < password.length(); i++) {
+                arr[i] = Integer.parseInt(password.substring(i, i + 1));
+            }
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] != 0) {
+                    if (checkRule(arr, one, i)) return false;
+                    password = password.substring(i + 2);
+                    break;
                 }
-                Boolean b = false;
-                int x = 0;
-                int y = 0;
-                CheckRule checkRule = new CheckRule(arr, b, x, y).invoke();
-                x = checkRule.getX();
-                y = checkRule.getY();
-                if (Math.abs(x + one) != y) {
-                    return false;
-                }
-            } else {
-                return false;
             }
             // 校验第二次规则
-            arr = new int[passwordArr[2].length()];
-            if (arr.length > 0) {
-                for (int i = 0; i < passwordArr[2].length(); i++) {
-                    arr[i] = Integer.parseInt(passwordArr[2].substring(i, i + 1));
+            arr = new int[password.length()];
+            for (int i = 0; i < password.length(); i++) {
+                arr[i] = Integer.parseInt(password.substring(i, i + 1));
+            }
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] != 0) {
+                    if (checkRule(arr, two, i)) return false;
+                    password = password.substring(i + 2);
+                    break;
                 }
-                Boolean b = false;
-                int x = 0;
-                int y = 0;
-                CheckRule checkRule = new CheckRule(arr, b, x, y).invoke();
-                x = checkRule.getX();
-                y = checkRule.getY();
-                if (Math.abs(x + two) != y) {
-                    return false;
-                }
-            } else {
-                return false;
             }
             // 校验第三次规则
-            arr = new int[passwordArr[3].length()];
-            if (arr.length > 0) {
-                for (int i = 0; i < passwordArr[3].length(); i++) {
-                    arr[i] = Integer.parseInt(passwordArr[3].substring(i, i + 1));
+            arr = new int[password.length()];
+            for (int i = 0; i < password.length(); i++) {
+                arr[i] = Integer.parseInt(password.substring(i, i + 1));
+            }
+            for (int i = 0; i < arr.length; i++) {
+                if (arr[i] != 0) {
+                    if (checkRule(arr, three, i)) return false;
+                    break;
                 }
-                Boolean b = false;
-                int x = 0;
-                int y = 0;
-                CheckRule checkRule = new CheckRule(arr, b, x, y).invoke();
-                x = checkRule.getX();
-                y = checkRule.getY();
-                if (Math.abs(x + three) != y) {
-                    return false;
-                }
-            } else {
-                return false;
             }
         } catch (IndexOutOfBoundsException e) {
             return false;
@@ -85,41 +66,30 @@ public class PasswordRuleUtil {
     }
 
     /**
-     * 校验密码规则
+     * 校验规则
+     *
+     * @param arr
+     * @param rule
+     * @param i
+     * @return
      */
-    private static class CheckRule {
-        private int[] arr;
-        private Boolean b;
-        private int x;
-        private int y;
-
-        public CheckRule(int[] arr, Boolean b, int x, int y) {
-            this.arr = arr;
-            this.b = b;
-            this.x = x;
-            this.y = y;
-        }
-
-        public int getX() {
-            return x;
-        }
-
-        public int getY() {
-            return y;
-        }
-
-        public CheckRule invoke() {
-            for (int i = 0; i < arr.length; i++) {
-                if (arr[i] != 0) {
-                    x = arr[i];
-                    y = arr[i + 1];
-                    b = true;
+    private static boolean checkRule(int[] arr, int rule, int i) {
+        if (rule > 0) {
+            if (arr[i] + rule >= 10) {
+                if (arr[i] + rule - 10 != arr[i + 1]) {
+                    return true;
                 }
-                if (b) {
-                    break;
+            } else {
+                if (arr[i] + rule != arr[i + 1]) {
+                    return true;
                 }
             }
-            return this;
         }
+        if (rule < 0) {
+            if (Math.abs(arr[i] + rule) != arr[i + 1]) {
+                return true;
+            }
+        }
+        return false;
     }
 }
